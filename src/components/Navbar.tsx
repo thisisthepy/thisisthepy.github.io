@@ -46,7 +46,7 @@ const Navbar: React.FC = () => {
           <div className="w-8 h-8 rounded-lg bg-pythonic-blue flex items-center justify-center">
             <span className="text-white font-bold text-xl">P</span>
           </div>
-          <span className="font-semibold text-lg">PyMobile</span>
+          <span className="font-semibold text-lg">PythonMultiplatform</span>
         </a>
         
         <nav className="hidden md:flex space-x-8">

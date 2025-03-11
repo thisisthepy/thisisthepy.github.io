@@ -12,10 +12,10 @@ const Footer: React.FC = () => {
               <div className="w-8 h-8 rounded-lg bg-pythonic-blue flex items-center justify-center">
                 <span className="text-white font-bold text-xl">P</span>
               </div>
-              <span className="font-semibold text-lg">PyMobile</span>
+              <span className="font-semibold text-lg">PythonMultiplatform</span>
             </div>
             <p className="text-gray-400 mb-6 max-w-md">
-              PyMobile enables Python developers to create native mobile applications 
+              PythonMultiplatform enables Python developers to create native mobile applications 
               without learning new languages, by embedding a Python interpreter into 
               Kotlin Multiplatform.
             </p>
@@ -74,7 +74,7 @@ const Footer: React.FC = () => {
         
         <div className="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
-            &copy; {new Date().getFullYear()} PyMobile. All rights reserved.
+            &copy; {new Date().getFullYear()} PythonMultiplatform. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <a href="#" className="text-gray-500 hover:text-white text-sm transition-colors">
