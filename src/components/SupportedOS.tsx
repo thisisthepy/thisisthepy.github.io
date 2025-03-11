@@ -5,6 +5,7 @@ import SectionHeading from './SectionHeading';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
 import { useIntersectionObserver } from '@/lib/animations';
+import { Image } from '@/components/ui/image';
 
 interface OSItemProps {
   name: string;
@@ -15,7 +16,9 @@ interface OSItemProps {
 const OSItem: React.FC<OSItemProps> = ({ name, icon, supported }) => {
   return (
     <div className="flex flex-col items-center p-6 rounded-xl bg-white shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-pythonic-gradient1/50">
-      <img src={icon} alt={name} className="w-16 h-16 mb-4" />
+      <div className="w-16 h-16 mb-4 flex items-center justify-center">
+        <img src={icon} alt={name} className="w-full h-full object-contain" />
+      </div>
       <h3 className="text-lg font-medium mb-2">{name}</h3>
       <div className={cn(
         "flex items-center justify-center w-8 h-8 rounded-full", 
@@ -31,6 +34,7 @@ const SupportedOS: React.FC = () => {
   const { t } = useLanguage();
   const { elementRef, isVisible } = useIntersectionObserver();
   
+  // Update with correct image paths that exist in the project
   const operatingSystems = [
     { name: t('android'), icon: "/lovable-uploads/android.png", supported: true },
     { name: t('ios'), icon: "/lovable-uploads/ios.png", supported: true },
@@ -52,6 +56,7 @@ const SupportedOS: React.FC = () => {
           title={t('supported-os')}
           subtitle=""
           className="mb-12"
+          titleClass="bg-gradient-to-r from-pythonic-blue to-pythonic-vividPurple bg-clip-text text-transparent"
         />
         
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
