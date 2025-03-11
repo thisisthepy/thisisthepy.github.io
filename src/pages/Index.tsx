@@ -6,6 +6,8 @@ import Features from '@/components/Features';
 import CodeDemo from '@/components/CodeDemo';
 import GetStarted from '@/components/GetStarted';
 import Footer from '@/components/Footer';
+import SupportedOS from '@/components/SupportedOS';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 const Index: React.FC = () => {
   useEffect(() => {
@@ -34,16 +36,19 @@ const Index: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Navbar />
-      <main>
-        <Hero />
-        <Features />
-        <CodeDemo />
-        <GetStarted />
-      </main>
-      <Footer />
-    </div>
+    <LanguageProvider>
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <main>
+          <Hero />
+          <Features />
+          <SupportedOS />
+          <CodeDemo />
+          <GetStarted />
+        </main>
+        <Footer />
+      </div>
+    </LanguageProvider>
   );
 };
 

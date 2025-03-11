@@ -1,14 +1,17 @@
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Github } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import { useScrollProgress } from '@/lib/animations';
+import LanguageSelector from './LanguageSelector';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Navbar: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollProgress = useScrollProgress();
+  const { t } = useLanguage();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -24,9 +27,9 @@ const Navbar: React.FC = () => {
   };
   
   const navLinks = [
-    { name: 'Features', href: '#features' },
-    { name: 'How It Works', href: '#how-it-works' },
-    { name: 'Get Started', href: '#get-started' }
+    { name: t('features'), href: '#features' },
+    { name: t('how-it-works'), href: '#how-it-works' },
+    { name: t('get-started'), href: '#get-started' }
   ];
   
   return (
@@ -36,14 +39,14 @@ const Navbar: React.FC = () => {
     )}>
       <div className="relative z-10">
         <div 
-          className="h-1 bg-pythonic-blue transition-all duration-300 ease-out" 
+          className="h-1 bg-gradient-to-r from-pythonic-blue via-pythonic-vividPurple to-pythonic-magenta transition-all duration-300 ease-out" 
           style={{ width: `${scrollProgress}%` }}
         />
       </div>
       
       <div className="container mx-auto px-6 py-4 flex items-center justify-between">
         <a href="/" className="flex items-center space-x-2">
-          <div className="w-8 h-8 rounded-lg bg-pythonic-blue flex items-center justify-center">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-pythonic-blue to-pythonic-vividPurple flex items-center justify-center">
             <span className="text-white font-bold text-xl">P</span>
           </div>
           <span className="font-semibold text-lg">PythonMultiplatform</span>
@@ -54,32 +57,48 @@ const Navbar: React.FC = () => {
             <a 
               key={link.name}
               href={link.href}
-              className="text-sm font-medium text-gray-700 hover:text-pythonic-blue transition-colors"
+              className="text-sm font-medium text-gray-700 hover:text-pythonic-vividPurple transition-colors"
             >
               {link.name}
             </a>
           ))}
         </nav>
         
-        <div className="hidden md:block">
-          <Button 
-            className="bg-pythonic-blue hover:bg-pythonic-blue/90 text-white button-hover-effect"
+        <div className="hidden md:flex items-center space-x-4">
+          <LanguageSelector />
+          
+          <a 
+            href="https://github.com/thisisthepy/python-multiplatform" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="text-gray-700 hover:text-pythonic-blue transition-colors"
           >
-            Download SDK
+            <Github className="h-5 w-5" />
+            <span className="sr-only">GitHub</span>
+          </a>
+          
+          <Button 
+            className="bg-gradient-to-r from-pythonic-blue to-pythonic-vividPurple hover:opacity-90 text-white button-hover-effect"
+          >
+            {t('download-sdk')}
           </Button>
         </div>
         
-        <button 
-          className="md:hidden focus:outline-none" 
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          {isMenuOpen ? (
-            <X className="h-6 w-6 text-gray-700" />
-          ) : (
-            <Menu className="h-6 w-6 text-gray-700" />
-          )}
-        </button>
+        <div className="flex items-center space-x-4 md:hidden">
+          <LanguageSelector />
+          
+          <button 
+            className="focus:outline-none" 
+            onClick={toggleMenu}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? (
+              <X className="h-6 w-6 text-gray-700" />
+            ) : (
+              <Menu className="h-6 w-6 text-gray-700" />
+            )}
+          </button>
+        </div>
       </div>
       
       {/* Mobile menu */}
@@ -92,17 +111,29 @@ const Navbar: React.FC = () => {
             <a 
               key={link.name}
               href={link.href}
-              className="text-lg font-medium text-gray-800 hover:text-pythonic-blue"
+              className="text-lg font-medium text-gray-800 hover:text-pythonic-vividPurple"
               onClick={() => setIsMenuOpen(false)}
             >
               {link.name}
             </a>
           ))}
-          <Button 
-            className="bg-pythonic-blue hover:bg-pythonic-blue/90 text-white w-full mt-4"
+          
+          <a 
+            href="https://github.com/thisisthepy/python-multiplatform" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center text-lg font-medium text-gray-800 hover:text-pythonic-blue"
             onClick={() => setIsMenuOpen(false)}
           >
-            Download SDK
+            <Github className="h-5 w-5 mr-2" />
+            GitHub
+          </a>
+          
+          <Button 
+            className="bg-gradient-to-r from-pythonic-blue to-pythonic-vividPurple hover:opacity-90 text-white w-full mt-4"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            {t('download-sdk')}
           </Button>
         </nav>
       </div>

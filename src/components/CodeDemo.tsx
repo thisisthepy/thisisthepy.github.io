@@ -5,10 +5,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useIntersectionObserver } from '@/lib/animations';
 import { cn } from '@/lib/utils';
 import { Image } from '@/components/ui/image';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const CodeDemo: React.FC = () => {
   const [activeTab, setActiveTab] = useState('python');
   const { elementRef, isVisible } = useIntersectionObserver();
+  const { t } = useLanguage();
   
   const handleTabChange = (value: string) => {
     setActiveTab(value);
@@ -72,21 +74,22 @@ fun JetpackCompose() {
       >
         <div className="container mx-auto">
           <SectionHeading
-            title="See How It Works"
-            subtitle="Code Example"
+            title={t('see-how')}
+            subtitle={t('code-example')}
+            titleClass="bg-gradient-to-r from-pythonic-blue to-pythonic-vividPurple bg-clip-text text-transparent"
           />
           
           <div className="max-w-5xl mx-auto">
             <Tabs defaultValue="python" onValueChange={handleTabChange}>
               <div className="flex justify-center mb-6">
-                <TabsList className="grid grid-cols-2 w-full max-w-md">
-                  <TabsTrigger value="python">Python</TabsTrigger>
-                  <TabsTrigger value="kotlin">Kotlin</TabsTrigger>
+                <TabsList className="grid grid-cols-2 w-full max-w-md bg-pythonic-softGray">
+                  <TabsTrigger value="python" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-pythonic-blue data-[state=active]:to-pythonic-vividPurple data-[state=active]:text-white">{t('python')}</TabsTrigger>
+                  <TabsTrigger value="kotlin" className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-pythonic-blue data-[state=active]:to-pythonic-vividPurple data-[state=active]:text-white">{t('kotlin')}</TabsTrigger>
                 </TabsList>
               </div>
               
               <div className="grid md:grid-cols-5 gap-6">
-                <div className="md:col-span-3 bg-gray-900 rounded-xl overflow-hidden shadow-xl border border-gray-800 transition-all duration-500">
+                <div className="md:col-span-3 bg-gray-900 rounded-xl overflow-hidden shadow-xl border border-gray-800 transition-all duration-500 hover:shadow-[0_0_30px_rgba(139,92,246,0.2)]">
                   <div className="flex items-center justify-between border-b border-gray-800 px-4 py-2">
                     <div className="flex items-center space-x-2">
                       <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -113,8 +116,8 @@ fun JetpackCompose() {
                   </TabsContent>
                 </div>
                 
-                <div className="md:col-span-2 flex items-center justify-center bg-gray-100 rounded-xl p-4">
-                  <div className="bg-white rounded-lg shadow-md p-6 max-w-[250px]">
+                <div className="md:col-span-2 flex items-center justify-center bg-gradient-to-br from-pythonic-softPurple to-pythonic-softBlue rounded-xl p-4">
+                  <div className="bg-white rounded-lg shadow-md p-6 max-w-[250px] transition-all duration-300 hover:shadow-lg">
                     <div className="flex justify-center">
                       <img 
                         src="/lovable-uploads/6c95c513-6b2a-47e9-862d-68685d05431d.png" 
@@ -131,8 +134,7 @@ fun JetpackCompose() {
               
               <div className="mt-8 text-center text-gray-600">
                 <p>
-                  <span className="font-semibold">PythonMultiplatform</span> provides Python-Kotlin interoperability,
-                  while <span className="font-semibold">pythonx-compose</span> handles UI wrapping
+                  {t('explanation')}
                 </p>
               </div>
             </Tabs>

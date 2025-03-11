@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -21,6 +20,8 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: [
+					"SUITE Variable", 
+					"SUITE", 
 					"SF Pro Display", 
 					"SF Pro Text",
 					"Inter",
@@ -85,7 +86,23 @@ export default {
 					blue: '#3776AB',
 					yellow: '#FFD43B',
 					light: '#E5F3FF',
-					dark: '#162B40'
+					dark: '#162B40',
+					gradient1: '#9b87f5',
+					gradient2: '#7E69AB',
+					gradient3: '#6E59A5',
+					lightPurple: '#D6BCFA',
+					vividPurple: '#8B5CF6',
+					magenta: '#D946EF',
+					orange: '#F97316',
+					oceanBlue: '#0EA5E9',
+					softGreen: '#F2FCE2',
+					softYellow: '#FEF7CD',
+					softOrange: '#FEC6A1',
+					softPurple: '#E5DEFF',
+					softPink: '#FFDEE2',
+					softPeach: '#FDE1D3',
+					softBlue: '#D3E4FD',
+					softGray: '#F1F0FB'
 				}
 			},
 			borderRadius: {
