@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Check, X, Monitor, Smartphone, Apple, Linux, Windows } from 'lucide-react';
+import { Check, X, Monitor, Smartphone, Apple } from 'lucide-react';
 import SectionHeading from './SectionHeading';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { cn } from '@/lib/utils';
@@ -46,7 +46,7 @@ const SupportedOS: React.FC = () => {
     },
     { 
       name: t('windows'), 
-      icon: <Windows className="w-12 h-12" />, 
+      icon: <Monitor className="w-12 h-12" />, 
       supported: true 
     },
     { 
@@ -56,7 +56,7 @@ const SupportedOS: React.FC = () => {
     },
     { 
       name: t('linux'), 
-      icon: <Linux className="w-12 h-12" />, 
+      icon: <Monitor className="w-12 h-12" />, 
       supported: true 
     },
   ];
