@@ -1,0 +1,49 @@
+:root{--bg:#fbfaf7;--fg:#1d1d1b;--muted:#5d5b55;--line:#e3e0d8;--card:#ffffff;--accent:#2f6f4f;--accent-2:#b8541b;--code:#f1efe8;--layer1:#e9f2ec;--layer2:#f4ece3;--layer3:#e8eef5;--layer4:#f2e9f2;--layer5:#eeeeea}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121311;--fg:#ecebe6;--muted:#a3a19a;--line:#2c2d29;--card:#1a1b18;--accent:#7cc39b;--accent-2:#e59a62;--code:#22231f;--layer1:#1c2a22;--layer2:#2c241c;--layer3:#1c2430;--layer4:#2a1f2a;--layer5:#22231f}}
+:root[data-theme="dark"]{--bg:#121311;--fg:#ecebe6;--muted:#a3a19a;--line:#2c2d29;--card:#1a1b18;--accent:#7cc39b;--accent-2:#e59a62;--code:#22231f;--layer1:#1c2a22;--layer2:#2c241c;--layer3:#1c2430;--layer4:#2a1f2a;--layer5:#22231f}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI","Apple SD Gothic Neo","Noto Sans KR",Roboto,sans-serif}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+.wrap{max-width:980px;margin:0 auto;padding:0 16px}
+header.top{border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--bg);z-index:5}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;height:56px}
+.brand{font-weight:700;letter-spacing:.2px;color:var(--fg)}
+.brand span{color:var(--accent)}
+nav.links{display:flex;gap:16px;align-items:center;font-size:14px;flex-wrap:wrap}
+nav.links a{color:var(--muted)}
+.lang{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:6px;padding:4px 10px;font-size:13px;cursor:pointer}
+.hero{padding:64px 0 40px}
+.hero h1{font-size:clamp(28px,5vw,46px);line-height:1.2;margin:0 0 16px}
+.hero p.lead{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:760px;margin:0}
+.kicker{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent-2);font-weight:600;margin-bottom:12px}
+section{padding:32px 0;border-top:1px solid var(--line)}
+section h2{font-size:24px;margin:0 0 16px}
+section h3{font-size:18px;margin:24px 0 8px}
+p{margin:0 0 14px}
+ul{padding-left:20px;margin:0 0 14px}li{margin:4px 0}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
+.card h3{margin:0 0 6px;font-size:17px}
+.card p{color:var(--muted);font-size:15px;margin:0 0 10px}
+.card .tag{display:inline-block;font-size:12px;color:var(--accent-2);border:1px solid var(--line);border-radius:999px;padding:1px 8px;margin-right:4px}
+.stack{display:flex;flex-direction:column;gap:8px;margin:8px 0 16px}
+.layer{border-radius:10px;padding:12px 14px;border:1px solid var(--line)}
+.layer b{display:block;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.layer .items{display:flex;flex-wrap:wrap;gap:8px}
+.layer .items a,.layer .items span{background:var(--card);border:1px solid var(--line);border-radius:6px;padding:3px 10px;font-size:14px;color:var(--fg)}
+.l1{background:var(--layer1)}.l2{background:var(--layer2)}.l3{background:var(--layer3)}.l4{background:var(--layer4)}.l5{background:var(--layer5)}
+code,pre{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px}
+code{background:var(--code);padding:1px 5px;border-radius:4px}
+pre{background:var(--code);padding:14px;border-radius:8px;overflow-x:auto;line-height:1.5}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;font-size:15px;margin:8px 0 16px;display:block;overflow-x:auto}
+th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:13px}
+.note{border-left:3px solid var(--accent);padding:6px 12px;color:var(--muted);margin:12px 0}
+.crumbs{font-size:14px;color:var(--muted);margin-top:24px}
+footer{border-top:1px solid var(--line);padding:28px 0 48px;color:var(--muted);font-size:14px}
+[data-l="ko"]{display:none}
+html[lang="ko"] [data-l="ko"]{display:revert}
+html[lang="ko"] [data-l="en"]{display:none}
+@media (max-width:640px){nav.links .hide-sm{display:none}.hero{padding:40px 0 24px}}

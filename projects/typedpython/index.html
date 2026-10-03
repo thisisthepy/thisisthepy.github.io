@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>TypedPython | thisisthepy</title><meta name="description" content="Ordinary typed Python, checked at build time and compiled ahead of time, with CPython&#x27;s exact semantics.">
+<link rel="stylesheet" href="../../assets/site.css"><script src="../../assets/site.js"></script></head>
+<body><header class="top"><div class="wrap"><a class="brand" href="../../">this<span>is</span>thepy</a><nav class="links">
+<a href="../../#vision"><span data-l="en">Vision</span><span data-l="ko">비전</span></a>
+<a href="../../#stack"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a>
+<a class="hide-sm" href="../../#principles"><span data-l="en">Principles</span><span data-l="ko">원칙</span></a>
+<a class="hide-sm" href="https://github.com/thisisthepy">GitHub</a>
+<button class="lang" id="lang" type="button">한국어</button></nav></div></header>
+<main class="wrap"><div class="crumbs"><a href="../../"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a> / TypedPython</div>
+<div class="hero" style="padding-top:24px"><div class="kicker">Language and runtime</div><h1>TypedPython</h1>
+<p class="lead"><span data-l="en">Ordinary typed Python, checked at build time and compiled ahead of time, with CPython's exact semantics.</span><span data-l="ko">평범한 타입 붙은 Python을 빌드 시점에 검사하고 미리 컴파일합니다. 의미는 CPython과 정확히 같습니다.</span></p>
+<p style="margin-top:14px;font-size:14px"><a href="https://github.com/thisisthepy/python-multiplatform">GitHub</a> · <a href="https://github.com/thisisthepy/python-multiplatform/blob/develop/docs/design/typedpython.md">Design</a></p></div>
+<div data-l="en">
+<section><h2>What it is</h2>
+<p>TypedPython lives inside python-multiplatform and does two things. First, a soundness gate in the build: the project's Python is type-checked, and a value whose type leaks to <code>Any</code> is an error, not a warning. Second, opt-in compilation: a typed function is lowered to an intermediate representation, compiled to C, and shipped as an ordinary CPython extension module inside the app.</p>
+<p>No new syntax and no new language. A function compiles or it stays in the interpreter, one function at a time.</p></section>
+<section><h2>The promise: same answers, much faster</h2>
+<p>The compiled code must behave exactly as CPython would. Integers that overflow become big integers instead of wrapping. Index errors raise the same exceptions. A long loop still answers Ctrl-C and lets other threads in. Where the compiler cannot prove a shortcut is safe, it does not take it.</p>
+<p>That is the line that separates it from the tools people compare it with. Cython and numba are fast mostly in modes that switch Python's rules off: wrapping integers, unchecked bounds, frozen globals. TypedPython keeps the rules and earns the speed by proof: interval analysis removes checks it can show are redundant, objects that never escape are not allocated, and buffers are read without copying. It is also compiled ahead of time, so it runs where a JIT cannot: on iOS, on Android and in GraalVM native images.</p>
+<table><tr><th>Benchmark</th><th>Speed-up over CPython</th><th>Note</th></tr>
+<tr><td>fannkuch</td><td>Rust parity</td><td></td></tr>
+<tr><td>nbody</td><td>31x</td><td>about 2x from Rust; profiling next</td></tr>
+<tr><td>spectral-norm</td><td>6.3x</td><td>goal 10x: call-path shortening, inlining, interval proofs</td></tr></table></section>
+<section><h2>Where it is going</h2>
+<ul>
+<li><b>Free-threaded code by construction.</b> Because the compiler knows which objects a function owns, it locks only what is shared, using CPython's own critical sections, and declares its modules safe to run without the GIL.</li>
+<li><b>Parallel loops.</b> Loops whose iterations are proven independent run across cores on free-threaded CPython.</li>
+<li><b>Virtual objects.</b> Short-lived objects in a hot loop are never materialised unless something could observe them.</li>
+<li><b>The replacement for C extensions.</b> The reason people write C for Python is speed. Typed Python that compiles safely, on every platform, makes that unnecessary for most code.</li>
+</ul></section>
+</div><div data-l="ko">
+<section><h2>무엇인가</h2>
+<p>TypedPython은 python-multiplatform 안에 있고 두 가지 일을 합니다. 첫째, 빌드 안의 건전성 검사입니다. 프로젝트의 Python을 타입 검사하고, 타입이 <code>Any</code>로 새는 값은 경고가 아니라 오류입니다. 둘째, 선택적 컴파일입니다. 타입 붙은 함수를 중간 표현으로 낮추고, C로 컴파일하고, 앱 안의 평범한 CPython 확장 모듈로 배포합니다.</p>
+<p>새 문법도, 새 언어도 없습니다. 함수 하나씩, 컴파일되거나 인터프리터에 남거나 둘 중 하나입니다.</p></section>
+<section><h2>약속: 같은 답, 훨씬 빠르게</h2>
+<p>컴파일된 코드는 CPython과 정확히 똑같이 동작해야 합니다. 넘친 정수는 한 바퀴 돌지 않고 큰 정수가 됩니다. 인덱스 오류는 같은 예외를 냅니다. 긴 루프도 Ctrl-C에 응답하고 다른 스레드에 차례를 줍니다. 컴파일러가 지름길이 안전하다고 증명하지 못하면 그 길로 가지 않습니다.</p>
+<p>흔히 비교하는 도구들과 갈리는 지점이 여기입니다. Cython과 numba가 빠른 것은 대부분 Python의 규칙을 끄는 모드에서입니다. 정수가 한 바퀴 돌고, 경계를 검사하지 않고, 전역 변수를 얼려 둡니다. TypedPython은 규칙을 지키고 속도는 증명으로 얻습니다. 구간 분석으로 필요 없음을 보인 검사를 없애고, 밖으로 나가지 않는 객체는 만들지 않고, 버퍼는 복사 없이 읽습니다. 또 미리 컴파일하기 때문에 JIT가 갈 수 없는 곳, iOS, Android, GraalVM 네이티브 이미지에서 돕니다.</p>
+<table><tr><th>벤치마크</th><th>CPython 대비</th><th>비고</th></tr>
+<tr><td>fannkuch</td><td>Rust와 대등</td><td></td></tr>
+<tr><td>nbody</td><td>31배</td><td>Rust와 약 2배 차이, 다음은 프로파일</td></tr>
+<tr><td>spectral-norm</td><td>6.3배</td><td>목표 10배: 호출 경로 단축, 인라인, 구간 증명</td></tr></table></section>
+<section><h2>어디로 가는가</h2>
+<ul>
+<li><b>처음부터 free-threaded에 안전한 코드.</b> 컴파일러는 함수가 어떤 객체를 소유하는지 알기 때문에, 공유되는 것만 CPython 자신의 critical section으로 잠그고, 모듈이 GIL 없이 돌아도 안전하다고 선언합니다.</li>
+<li><b>병렬 루프.</b> 반복이 서로 독립이라고 증명된 루프는 free-threaded CPython에서 여러 코어로 나뉘어 돕니다.</li>
+<li><b>가상 객체.</b> 뜨거운 루프 안의 짧게 사는 객체는, 무언가 그것을 관측할 수 있을 때만 실제로 만듭니다.</li>
+<li><b>C 확장의 대체.</b> 사람들이 Python을 위해 C를 쓰는 이유는 속도입니다. 모든 플랫폼에서 안전하게 컴파일되는 타입 붙은 Python이 있으면 대부분의 코드에서 그럴 필요가 없어집니다.</li>
+</ul></section>
+</div>
+<section><h2><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></h2><p><a class="tag" href="../python-multiplatform/">python-multiplatform</a> <a class="tag" href="../pypackpack/">pypackpack</a> <a class="tag" href="../pythonx-graphics/">pythonx-graphics</a> <a class="tag" href="../pythonx-concurrent/">pythonx-concurrent</a></p></section></main>
+<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a></div></footer>
+</body></html>

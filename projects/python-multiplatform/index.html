@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>python-multiplatform | thisisthepy</title><meta name="description" content="CPython embedded in Kotlin Multiplatform, with Kotlin and Python calling each other in both directions.">
+<link rel="stylesheet" href="../../assets/site.css"><script src="../../assets/site.js"></script></head>
+<body><header class="top"><div class="wrap"><a class="brand" href="../../">this<span>is</span>thepy</a><nav class="links">
+<a href="../../#vision"><span data-l="en">Vision</span><span data-l="ko">비전</span></a>
+<a href="../../#stack"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a>
+<a class="hide-sm" href="../../#principles"><span data-l="en">Principles</span><span data-l="ko">원칙</span></a>
+<a class="hide-sm" href="https://github.com/thisisthepy">GitHub</a>
+<button class="lang" id="lang" type="button">한국어</button></nav></div></header>
+<main class="wrap"><div class="crumbs"><a href="../../"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a> / python-multiplatform</div>
+<div class="hero" style="padding-top:24px"><div class="kicker">Language and runtime</div><h1>python-multiplatform</h1>
+<p class="lead"><span data-l="en">CPython embedded in Kotlin Multiplatform, with Kotlin and Python calling each other in both directions.</span><span data-l="ko">Kotlin Multiplatform 안에 CPython을 넣고, Kotlin과 Python이 서로를 양방향으로 부르게 합니다.</span></p>
+<p style="margin-top:14px;font-size:14px"><a href="https://github.com/thisisthepy/python-multiplatform">GitHub</a> · <a href="https://thisisthepy.github.io/python-multiplatform/">Guide</a></p></div>
+<div data-l="en">
+<section><h2>What it is</h2>
+<p>python-multiplatform is the bridge everything else stands on. It embeds an unmodified CPython in a Kotlin Multiplatform app on Android, iOS, desktop and the web, and lets the two languages call each other as if they were one program.</p>
+<ul>
+<li><b>Kotlin to Python (downcall).</b> One <code>expect</code> declaration per CPython C API function, about 330 of them, with an <code>actual</code> per platform: JNI registered natives on Android, the Foreign Function and Memory API on desktop, direct calls on Kotlin/Native for iOS. A typed object model sits on top, so Kotlin code works with <code>PyObject</code>s rather than raw pointers.</li>
+<li><b>Python to Kotlin (upcall).</b> A function table generated at build time, by a KSP processor for the app's own Kotlin and by an artifact walker that reads the compiled jars and klibs of any library, Compose included. Python enters Kotlin through one entry point per platform.</li>
+<li><b>The binder.</b> Kotlin packages appear in Python under their own names: <code>import androidx.compose.material3</code> is Material 3. Inside a module, every member and keyword is also reachable in snake_case, so <code>fill_max_width()</code> and <code>on_click=</code> work beside <code>fillMaxWidth()</code>. The Gradle plugin writes <code>.pyi</code> stubs for all of it.</li>
+<li><b>The Compose host.</b> <code>PythonAppView</code>, <code>PythonWidget</code> and <code>PythonLauncher</code> draw a Python-declared root inside a Compose UI, and <code>rememberSaveableWrapper</code> gives Python Compose's saved state.</li>
+</ul></section>
+<section><h2>Why it is built this way</h2>
+<p>Kotlin/Native has almost no reflection and a GraalVM native image is a closed world, so nothing may be discovered at run time. Every path from Python into Kotlin is decided while the app builds, and the Kotlin compiler, not a string lookup, chooses the method. The same design that makes native images possible also makes calls fast: the cost of an upcall is measured and tracked, and expensive paths carry an annotation that says so.</p>
+<p>The binder never renames a namespace. A Kotlin name in Python means the original Kotlin, which is why <code>pythonx</code> can be a real Python package that builds on top of <code>androidx</code> rather than a disguise for it.</p></section>
+<section><h2>Where it is going</h2>
+<ul>
+<li><b>Free-threaded only.</b> The embedded interpreter moves to CPython 3.15t with no GIL on every platform, including the browser under cross-origin isolation, using the 3.15 stable ABI for free-threaded builds (abi3t). Python and Kotlin threads then run Python in parallel.</li>
+<li><b>Python on Kotlin's threads.</b> A Python coroutine can be stepped by a Kotlin coroutine on any dispatcher, including JVM virtual threads, which is what pythonx-concurrent builds on.</li>
+<li><b>Proof by the notebook.</b> pythonx-compose's lecture notebook runs end to end against an installed wheel, 20 scenarios, pixel-equal to the same UI written in Kotlin.</li>
+</ul></section>
+</div><div data-l="ko">
+<section><h2>무엇인가</h2>
+<p>python-multiplatform은 나머지 모든 것이 올라서는 다리입니다. 고치지 않은 CPython을 Android, iOS, 데스크톱, 웹의 Kotlin Multiplatform 앱 안에 넣고, 두 언어가 한 프로그램처럼 서로를 부르게 합니다.</p>
+<ul>
+<li><b>Kotlin에서 Python으로 (downcall).</b> CPython C API 함수마다 <code>expect</code> 선언 하나, 약 330개가 있고, 플랫폼마다 <code>actual</code>이 있습니다. Android는 JNI 등록 네이티브, 데스크톱은 Foreign Function and Memory API, iOS는 Kotlin/Native 직접 호출입니다. 그 위에 타입이 있는 객체 모델이 있어서 Kotlin 코드는 포인터가 아니라 <code>PyObject</code>로 일합니다.</li>
+<li><b>Python에서 Kotlin으로 (upcall).</b> 빌드 시점에 생성한 함수 표를 씁니다. 앱 자신의 Kotlin은 KSP 프로세서가, Compose를 포함한 모든 라이브러리는 컴파일된 jar와 klib을 읽는 아티팩트 워커가 표를 만듭니다. Python은 플랫폼마다 하나의 진입점으로 Kotlin에 들어갑니다.</li>
+<li><b>바인더.</b> Kotlin 패키지가 원래 이름 그대로 Python에 나타납니다. <code>import androidx.compose.material3</code>는 Material 3입니다. 모듈 안의 멤버와 키워드는 snake_case로도 부를 수 있어서 <code>fillMaxWidth()</code> 옆에서 <code>fill_max_width()</code>와 <code>on_click=</code>이 동작합니다. Gradle 플러그인이 이 모두의 <code>.pyi</code> 스텁을 씁니다.</li>
+<li><b>Compose 호스트.</b> <code>PythonAppView</code>, <code>PythonWidget</code>, <code>PythonLauncher</code>가 Python이 선언한 루트를 Compose UI 안에 그리고, <code>rememberSaveableWrapper</code>가 Python에 Compose의 저장 상태를 줍니다.</li>
+</ul></section>
+<section><h2>왜 이렇게 만드는가</h2>
+<p>Kotlin/Native에는 리플렉션이 거의 없고 GraalVM 네이티브 이미지는 닫힌 세계라서, 실행 중에 무언가를 찾아낼 수 없습니다. 그래서 Python에서 Kotlin으로 가는 모든 경로를 앱이 빌드될 때 정하고, 메서드는 문자열 검색이 아니라 Kotlin 컴파일러가 고릅니다. 네이티브 이미지를 가능하게 하는 이 설계가 호출도 빠르게 만듭니다. upcall 비용은 측정하고 추적하며, 비싼 경로에는 그렇다고 알리는 어노테이션이 붙습니다.</p>
+<p>바인더는 네임스페이스 이름을 절대 바꾸지 않습니다. Python에서 보이는 Kotlin 이름은 원래 Kotlin을 뜻합니다. 그래서 <code>pythonx</code>는 <code>androidx</code>를 위장한 것이 아니라 그 위에 쌓은 진짜 Python 패키지가 될 수 있습니다.</p></section>
+<section><h2>어디로 가는가</h2>
+<ul>
+<li><b>free-threaded 전용.</b> 안에 넣는 인터프리터를 모든 플랫폼에서 GIL 없는 CPython 3.15t로 옮깁니다. 브라우저도 교차 출처 격리 아래에서 같고, free-threaded 빌드용 3.15 안정 ABI(abi3t)를 씁니다. 그러면 Python 스레드와 Kotlin 스레드가 Python을 병렬로 실행합니다.</li>
+<li><b>Kotlin 스레드 위의 Python.</b> Python 코루틴을 Kotlin 코루틴이 어떤 디스패처에서든, JVM 가상 스레드에서도 한 단계씩 실행할 수 있습니다. pythonx-concurrent가 이 위에 섭니다.</li>
+<li><b>노트북으로 증명.</b> pythonx-compose의 강의 노트북이 설치된 wheel로 처음부터 끝까지 돕니다. 시나리오 20개가 Kotlin으로 쓴 같은 UI와 픽셀까지 같습니다.</li>
+</ul></section>
+</div>
+<section><h2><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></h2><p><a class="tag" href="../typedpython/">TypedPython</a> <a class="tag" href="../pythonx-compose/">pythonx-compose</a> <a class="tag" href="../toolchain/">toolchain</a> <a class="tag" href="../pypackpack/">pypackpack</a> <a class="tag" href="../torchnative/">torchnative</a></p></section></main>
+<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a></div></footer>
+</body></html>
