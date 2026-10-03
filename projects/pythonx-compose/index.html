@@ -3,48 +3,53 @@
 <title>pythonx-compose | thisisthepy</title><meta name="description" content="Build Compose Multiplatform UIs in Python: Python Declarative UI Framework.">
 <link rel="stylesheet" href="../../assets/site.css"><script src="../../assets/site.js"></script></head>
 <body><header class="top"><div class="wrap"><a class="brand" href="../../">this<span>is</span>thepy</a><nav class="links">
-<a href="../../#vision"><span data-l="en">Vision</span><span data-l="ko">비전</span></a>
-<a href="../../#stack"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a>
-<a class="hide-sm" href="../../#principles"><span data-l="en">Principles</span><span data-l="ko">원칙</span></a>
+<a href="../../#problem"><span data-l="en">Why</span><span data-l="ko">왜</span></a>
+<a href="../../#architecture"><span data-l="en">Architecture</span><span data-l="ko">구조</span></a>
+<a href="../../#projects"><span data-l="en">Projects</span><span data-l="ko">프로젝트</span></a>
+<a class="hide-sm" href="../../#future"><span data-l="en">Future</span><span data-l="ko">미래</span></a>
 <a class="hide-sm" href="https://github.com/thisisthepy">GitHub</a>
 <button class="lang" id="lang" type="button">한국어</button></nav></div></header>
-<main class="wrap"><div class="crumbs"><a href="../../"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a> / pythonx-compose</div>
-<div class="hero" style="padding-top:24px"><div class="kicker">pythonx</div><h1>pythonx-compose</h1>
+<main class="wrap"><div class="crumbs"><a href="../../"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a> / <a href="../../#projects"><span data-l="en">Projects</span><span data-l="ko">프로젝트</span></a> / pythonx-compose</div>
+<div class="hero" style="padding:24px 0 28px"><div class="kicker">pythonx</div><h1>pythonx-compose</h1>
 <p class="lead"><span data-l="en">Build Compose Multiplatform UIs in Python: Python Declarative UI Framework.</span><span data-l="ko">Python으로 Compose Multiplatform UI를 만듭니다: Python 선언형 UI 프레임워크.</span></p>
-<p style="margin-top:14px;font-size:14px"><a href="https://github.com/thisisthepy/pythonx-compose">GitHub</a> · <a href="https://thisisthepy.github.io/pythonx-compose/">Guide</a> · <a href="https://pypi.org/project/pythonx-compose/">PyPI</a></p></div>
-<div data-l="en">
-<section><h2>What it is</h2>
-<p>pythonx-compose lets a Python programmer build real Jetpack and Compose Multiplatform interfaces without learning Kotlin first. Composables are Python functions with a decorator; the widgets are Compose's own <code>Text</code>, <code>Button</code>, <code>Card</code>, <code>TextField</code>, <code>Column</code>, <code>Row</code>; the screen is declared with <code>@app</code>; state is Compose's saved state through <code>remember_saveable</code>, read and written from anywhere, including a notebook cell.</p>
-<p>It began as a lecture: "Python app development", a notebook in which a running app's screen is replaced and its state changed one cell at a time. That notebook is still the specification, and it runs end to end against an installed wheel.</p></section>
-<section><h2>Design</h2>
+<p style="margin-top:14px;font-size:14px"><a href="https://github.com/thisisthepy/pythonx-compose">GitHub</a> · <a href="https://thisisthepy.github.io/pythonx-compose/">Guide</a> · <a href="https://pypi.org/project/pythonx-compose/">PyPI</a></p></div><div class="layout"><aside class="toc"><b><span data-l="en">On this page</span><span data-l="ko">이 페이지</span></b><a href="#overview"><span data-l="en">Overview</span><span data-l="ko">개요</span></a><a href="#problem"><span data-l="en">The problem it solves</span><span data-l="ko">푸는 문제</span></a><a href="#how"><span data-l="en">How it works</span><span data-l="ko">동작 방식</span></a><a href="#decisions"><span data-l="en">Design decisions</span><span data-l="ko">설계 결정</span></a><a href="#fit"><span data-l="en">Where it fits</span><span data-l="ko">생태계 안의 위치</span></a><a href="#state"><span data-l="en">Where it stands</span><span data-l="ko">현재 상태</span></a><a href="#future"><span data-l="en">Future design</span><span data-l="ko">미래 설계</span></a><a href="#roadmap"><span data-l="en">Roadmap</span><span data-l="ko">로드맵</span></a><a href="#related"><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></a></aside><div><section id="overview"><h2><span data-l="en">Overview</span><span data-l="ko">개요</span></h2><div data-l="en"><p>pythonx-compose lets a Python programmer build real Jetpack and Compose Multiplatform interfaces without learning Kotlin first. Composables are Python functions with a decorator, the widgets are Compose's own, the screen is declared with <code>@app</code>, and state is Compose's saved state, readable and writable from anywhere, a notebook cell included.</p></div><div data-l="ko"><p>pythonx-compose는 Python 개발자가 Kotlin을 먼저 배우지 않고 진짜 Jetpack과 Compose Multiplatform 화면을 만들게 합니다. 컴포저블은 데코레이터 붙은 Python 함수이고, 위젯은 Compose 자신의 것이며, 화면은 <code>@app</code>으로 선언하고, 상태는 노트북 셀을 포함해 어디서든 읽고 쓰는 Compose의 저장 상태입니다.</p></div></section><section id="problem"><h2><span data-l="en">The problem it solves</span><span data-l="ko">푸는 문제</span></h2><div data-l="en"><p>It began as a lecture, "Python app development", for people who know Python and want to build an app. The lecture's notebook replaces a running app's screen and changes its state one cell at a time. Doing that on a real native UI, not a drawing of one, needs Compose itself to be usable from Python.</p></div><div data-l="ko"><p>시작은 Python을 알고 앱을 만들고 싶은 사람들을 위한 강의 "Python 앱 개발 특강"이었습니다. 강의 노트북은 실행 중인 앱의 화면을 셀 하나씩 바꾸고 상태를 고칩니다. 그림이 아니라 진짜 네이티브 UI에서 그렇게 하려면 Compose 자체를 Python에서 쓸 수 있어야 합니다.</p></div></section><section id="how"><h2><span data-l="en">How it works</span><span data-l="ko">동작 방식</span></h2><div data-l="en"><pre><code>from pythonx.compose.runtime import Composable, app, remember_saveable
+from pythonx.compose.material3 import Column, Text, TextField
+from pythonx.compose.foundation.text.input import TextFieldState
+
+field = TextFieldState("")
+
+@app
+@Composable
+def App():
+    App.messages = messages = remember_saveable("hello")
+    Column(content=lambda: {
+        Text(messages.getValue()),
+        TextField(state=field),
+    })</code></pre>
 <ul>
-<li><b>Declared, not updated.</b> There is no update function. Redeclaring a root changes the screen.</li>
-<li><b>A real package over real Compose.</b> <code>pythonx.compose</code> imports <code>androidx.compose</code> through the binder and arranges it for Python; the Kotlin names stay what they are.</li>
-<li><b>Text input stays in Compose.</b> A <code>TextField</code> takes a Compose <code>TextFieldState</code>, so input-method composition (Korean, Japanese, Chinese) never round-trips through Python per keystroke.</li>
-</ul></section>
-<section><h2>Where it is going</h2>
+<li><b>Widgets</b> are androidx's own, reached through python-multiplatform's binder and re-exported by package, with snake_case keywords.</li>
+<li><b>The app root</b> is declared with <code>@app</code>; redeclaring it replaces the screen. There is no update function.</li>
+<li><b>State</b> comes from <code>remember_saveable</code>, Compose's <code>rememberSaveable</code>, so it survives rotation and process death. The notebook reads and writes it as <code>main.App.messages.getValue()</code> and <code>setValue(...)</code>.</li>
+<li><b>Text input</b> stays inside Compose: <code>TextField</code> takes a <code>TextFieldState</code>, so input-method composition never round-trips through Python per keystroke.</li>
+</ul></div><div data-l="ko"><pre><code>from pythonx.compose.runtime import Composable, app, remember_saveable
+from pythonx.compose.material3 import Column, Text, TextField
+from pythonx.compose.foundation.text.input import TextFieldState
+
+field = TextFieldState("")
+
+@app
+@Composable
+def App():
+    App.messages = messages = remember_saveable("hello")
+    Column(content=lambda: {
+        Text(messages.getValue()),
+        TextField(state=field),
+    })</code></pre>
 <ul>
-<li>Coroutine scopes for UI work on top of pythonx-concurrent.</li>
-<li>Material 3 through the ecosystem's extended Compose core, with its design system.</li>
-<li>0.1.0b1: the whole lecture notebook usable from PyPI.</li>
-</ul></section>
-</div><div data-l="ko">
-<section><h2>무엇인가</h2>
-<p>pythonx-compose는 Python 개발자가 Kotlin을 먼저 배우지 않고 진짜 Jetpack과 Compose Multiplatform 화면을 만들게 합니다. 컴포저블은 데코레이터가 붙은 Python 함수이고, 위젯은 Compose 자신의 <code>Text</code>, <code>Button</code>, <code>Card</code>, <code>TextField</code>, <code>Column</code>, <code>Row</code>입니다. 화면은 <code>@app</code>으로 선언하고, 상태는 <code>remember_saveable</code>로 얻는 Compose의 저장 상태라서 노트북 셀을 포함해 어디서든 읽고 씁니다.</p>
-<p>시작은 강의였습니다. "Python 앱 개발 특강" 노트북에서 실행 중인 앱의 화면을 셀 하나씩 바꾸고 상태를 고칩니다. 그 노트북이 지금도 스펙이고, 설치된 wheel로 처음부터 끝까지 돕니다.</p></section>
-<section><h2>설계</h2>
-<ul>
-<li><b>갱신하지 않고 선언한다.</b> 업데이트 함수가 없습니다. 루트를 다시 선언하면 화면이 바뀝니다.</li>
-<li><b>진짜 Compose 위의 진짜 패키지.</b> <code>pythonx.compose</code>는 바인더로 <code>androidx.compose</code>를 가져와 Python에 맞게 정리하고, Kotlin 이름은 그대로 둡니다.</li>
-<li><b>글자 입력은 Compose 안에서.</b> <code>TextField</code>는 Compose의 <code>TextFieldState</code>를 받아서, 한글 같은 입력기 조합이 키를 누를 때마다 Python을 오가지 않습니다.</li>
-</ul></section>
-<section><h2>어디로 가는가</h2>
-<ul>
-<li>pythonx-concurrent 위의 UI 작업용 코루틴 스코프.</li>
-<li>생태계의 확장 Compose 코어를 통한 Material 3와 디자인 시스템.</li>
-<li>0.1.0b1: 강의 노트북 전체를 PyPI에서 설치해 쓸 수 있게.</li>
-</ul></section>
-</div>
-<section><h2><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></h2><p><a class="tag" href="../python-multiplatform/">python-multiplatform</a> <a class="tag" href="../pythonx-concurrent/">pythonx-concurrent</a> <a class="tag" href="../pythonx-graphics/">pythonx-graphics</a> <a class="tag" href="../compose-multiplatform-core-extended/">compose-multiplatform-core-extended</a></p></section></main>
-<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a></div></footer>
+<li><b>위젯</b>은 androidx 자신의 것이고, python-multiplatform의 바인더로 닿아 패키지 단위로 다시 내보내며, 키워드는 snake_case입니다.</li>
+<li><b>앱 루트</b>는 <code>@app</code>으로 선언하고, 다시 선언하면 화면이 바뀝니다. 업데이트 함수는 없습니다.</li>
+<li><b>상태</b>는 Compose의 <code>rememberSaveable</code>인 <code>remember_saveable</code>에서 와서 화면 회전과 프로세스 종료 뒤에도 살아남습니다. 노트북은 <code>main.App.messages.getValue()</code>와 <code>setValue(...)</code>로 읽고 씁니다.</li>
+<li><b>글자 입력</b>은 Compose 안에 머뭅니다. <code>TextField</code>가 <code>TextFieldState</code>를 받아서 입력기 조합이 키마다 Python을 오가지 않습니다.</li>
+</ul></div></section><section id="decisions"><h2><span data-l="en">Design decisions</span><span data-l="ko">설계 결정</span></h2><div data-l="en"><ul><li><b>The notebook is the specification</b>, in its own spelling: <code>main.App.messages.getValue()</code> and <code>setValue()</code>, with <code>.value</code> as an alias.</li><li><b>Declared, not updated.</b> No update function, by the maintainer's decision.</li><li><b>A real package over real Compose.</b> <code>pythonx.compose</code> never renames <code>androidx</code>; it arranges it.</li><li><b>One namespace.</b> <code>pythonx</code> is a namespace package shared with every other pythonx library.</li></ul></div><div data-l="ko"><ul><li><b>노트북이 스펙</b>이고 노트북의 표기 그대로입니다. <code>main.App.messages.getValue()</code>와 <code>setValue()</code>, 별칭 <code>.value</code>.</li><li><b>갱신하지 않고 선언한다.</b> 메인테이너의 결정으로 업데이트 함수는 없습니다.</li><li><b>진짜 Compose 위의 진짜 패키지.</b> <code>pythonx.compose</code>는 <code>androidx</code>의 이름을 바꾸지 않고 정리만 합니다.</li><li><b>하나의 네임스페이스.</b> <code>pythonx</code>는 다른 모든 pythonx 라이브러리와 함께 쓰는 네임스페이스 패키지입니다.</li></ul></div></section><section id="fit"><h2><span data-l="en">Where it fits</span><span data-l="ko">생태계 안의 위치</span></h2><div data-l="en"><p>It runs on python-multiplatform's binder and Compose host. Coroutine scopes for UI work come from pythonx-concurrent; Material 3 and its design system come through compose-multiplatform-core-extended; 3D views from pythonx-graphics sit inside its layouts.</p></div><div data-l="ko"><p>python-multiplatform의 바인더와 Compose 호스트 위에서 돕니다. UI 작업용 코루틴 스코프는 pythonx-concurrent에서, Material 3와 디자인 시스템은 compose-multiplatform-core-extended에서 오고, pythonx-graphics의 3D 화면은 이 레이아웃 안에 들어갑니다.</p></div></section><section id="state"><h2><span data-l="en">Where it stands</span><span data-l="ko">현재 상태</span></h2><div data-l="en"><p><span class="status-ok">Verified</span>: the lecture notebook runs end to end from an installed wheel against the real Compose jars, 20 scenarios pixel-equal to the same UI written in Kotlin, including Korean input composition. <span class="status-ok">Published</span>: 0.1.0a1; 0.1.0a2 prepared.</p></div><div data-l="ko"><p><span class="status-ok">검증</span>: 강의 노트북이 설치된 wheel로 진짜 Compose jar 위에서 처음부터 끝까지 돌고, 시나리오 20개가 Kotlin으로 쓴 같은 UI와 픽셀까지 같으며 한글 입력 조합도 포함합니다. <span class="status-ok">배포</span>: 0.1.0a1, 0.1.0a2 준비.</p></div></section><section id="future"><h2><span data-l="en">Future design</span><span data-l="ko">미래 설계</span></h2><div data-l="en"><ul><li>Coroutine scopes (<code>DefaultCoroutineScope</code>, <code>MainCoroutineScope</code>) on pythonx-concurrent.</li><li>Material 3 colour schemes and the ecosystem's design system.</li><li>Live editing of a running app from a notebook as the normal way to build UI.</li></ul></div><div data-l="ko"><ul><li>pythonx-concurrent 위의 코루틴 스코프(<code>DefaultCoroutineScope</code>, <code>MainCoroutineScope</code>).</li><li>Material 3 색 구성표와 생태계의 디자인 시스템.</li><li>노트북에서 실행 중인 앱을 고치는 것이 UI를 만드는 평범한 방법이 되는 것.</li></ul></div></section><section id="roadmap"><h2><span data-l="en">Roadmap</span><span data-l="ko">로드맵</span></h2><div data-l="en"><ol><li>0.1.0a2: notebook spelling, remember_saveable.</li><li>0.1.0b1, 2026-11-20: the whole lecture notebook from PyPI.</li></ol></div><div data-l="ko"><ol><li>0.1.0a2: 노트북 표기, remember_saveable.</li><li>0.1.0b1, 2026-11-20: 강의 노트북 전체를 PyPI에서.</li></ol></div></section><section id="related"><h2><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></h2><div data-l="en"><p><a class="tag" href="../python-multiplatform/">python-multiplatform</a> <a class="tag" href="../pythonx-concurrent/">pythonx-concurrent</a> <a class="tag" href="../pythonx-graphics/">pythonx-graphics</a> <a class="tag" href="../compose-multiplatform-core-extended/">compose-multiplatform-core-extended</a></p></div><div data-l="ko"><p><a class="tag" href="../python-multiplatform/">python-multiplatform</a> <a class="tag" href="../pythonx-concurrent/">pythonx-concurrent</a> <a class="tag" href="../pythonx-graphics/">pythonx-graphics</a> <a class="tag" href="../compose-multiplatform-core-extended/">compose-multiplatform-core-extended</a></p></div></section></div></div></main>
+<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a> · <a href="../../#projects"><span data-l="en">All projects</span><span data-l="ko">전체 프로젝트</span></a></div></footer>
 </body></html>

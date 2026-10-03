@@ -3,52 +3,57 @@
 <title>TypedPython | thisisthepy</title><meta name="description" content="Ordinary typed Python, checked at build time and compiled ahead of time, with CPython&#x27;s exact semantics.">
 <link rel="stylesheet" href="../../assets/site.css"><script src="../../assets/site.js"></script></head>
 <body><header class="top"><div class="wrap"><a class="brand" href="../../">this<span>is</span>thepy</a><nav class="links">
-<a href="../../#vision"><span data-l="en">Vision</span><span data-l="ko">비전</span></a>
-<a href="../../#stack"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a>
-<a class="hide-sm" href="../../#principles"><span data-l="en">Principles</span><span data-l="ko">원칙</span></a>
+<a href="../../#problem"><span data-l="en">Why</span><span data-l="ko">왜</span></a>
+<a href="../../#architecture"><span data-l="en">Architecture</span><span data-l="ko">구조</span></a>
+<a href="../../#projects"><span data-l="en">Projects</span><span data-l="ko">프로젝트</span></a>
+<a class="hide-sm" href="../../#future"><span data-l="en">Future</span><span data-l="ko">미래</span></a>
 <a class="hide-sm" href="https://github.com/thisisthepy">GitHub</a>
 <button class="lang" id="lang" type="button">한국어</button></nav></div></header>
-<main class="wrap"><div class="crumbs"><a href="../../"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a> / TypedPython</div>
-<div class="hero" style="padding-top:24px"><div class="kicker">Language and runtime</div><h1>TypedPython</h1>
-<p class="lead"><span data-l="en">Ordinary typed Python, checked at build time and compiled ahead of time, with CPython's exact semantics.</span><span data-l="ko">평범한 타입 붙은 Python을 빌드 시점에 검사하고 미리 컴파일합니다. 의미는 CPython과 정확히 같습니다.</span></p>
-<p style="margin-top:14px;font-size:14px"><a href="https://github.com/thisisthepy/python-multiplatform">GitHub</a> · <a href="https://github.com/thisisthepy/python-multiplatform/blob/develop/docs/design/typedpython.md">Design</a></p></div>
-<div data-l="en">
-<section><h2>What it is</h2>
-<p>TypedPython lives inside python-multiplatform and does two things. First, a soundness gate in the build: the project's Python is type-checked, and a value whose type leaks to <code>Any</code> is an error, not a warning. Second, opt-in compilation: a typed function is lowered to an intermediate representation, compiled to C, and shipped as an ordinary CPython extension module inside the app.</p>
-<p>No new syntax and no new language. A function compiles or it stays in the interpreter, one function at a time.</p></section>
-<section><h2>The promise: same answers, much faster</h2>
-<p>The compiled code must behave exactly as CPython would. Integers that overflow become big integers instead of wrapping. Index errors raise the same exceptions. A long loop still answers Ctrl-C and lets other threads in. Where the compiler cannot prove a shortcut is safe, it does not take it.</p>
-<p>That is the line that separates it from the tools people compare it with. Cython and numba are fast mostly in modes that switch Python's rules off: wrapping integers, unchecked bounds, frozen globals. TypedPython keeps the rules and earns the speed by proof: interval analysis removes checks it can show are redundant, objects that never escape are not allocated, and buffers are read without copying. It is also compiled ahead of time, so it runs where a JIT cannot: on iOS, on Android and in GraalVM native images.</p>
-<table><tr><th>Benchmark</th><th>Speed-up over CPython</th><th>Note</th></tr>
+<main class="wrap"><div class="crumbs"><a href="../../"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a> / <a href="../../#projects"><span data-l="en">Projects</span><span data-l="ko">프로젝트</span></a> / TypedPython</div>
+<div class="hero" style="padding:24px 0 28px"><div class="kicker">Language and runtime</div><h1>TypedPython</h1>
+<p class="lead"><span data-l="en">Ordinary typed Python, checked at build time and compiled ahead of time, with CPython's exact semantics.</span><span data-l="ko">평범한 타입 붙은 Python을 빌드할 때 검사하고 미리 컴파일합니다. 의미는 CPython과 정확히 같습니다.</span></p>
+<p style="margin-top:14px;font-size:14px"><a href="https://github.com/thisisthepy/python-multiplatform">GitHub</a> · <a href="https://github.com/thisisthepy/python-multiplatform/blob/develop/docs/design/typedpython.md">Design</a></p></div><div class="layout"><aside class="toc"><b><span data-l="en">On this page</span><span data-l="ko">이 페이지</span></b><a href="#overview"><span data-l="en">Overview</span><span data-l="ko">개요</span></a><a href="#problem"><span data-l="en">The problem it solves</span><span data-l="ko">푸는 문제</span></a><a href="#how"><span data-l="en">How it works</span><span data-l="ko">동작 방식</span></a><a href="#decisions"><span data-l="en">Design decisions</span><span data-l="ko">설계 결정</span></a><a href="#fit"><span data-l="en">Where it fits</span><span data-l="ko">생태계 안의 위치</span></a><a href="#state"><span data-l="en">Where it stands</span><span data-l="ko">현재 상태</span></a><a href="#future"><span data-l="en">Future design</span><span data-l="ko">미래 설계</span></a><a href="#roadmap"><span data-l="en">Roadmap</span><span data-l="ko">로드맵</span></a><a href="#related"><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></a></aside><div><section id="overview"><h2><span data-l="en">Overview</span><span data-l="ko">개요</span></h2><div data-l="en"><p>TypedPython lives inside python-multiplatform and does two things. A <b>soundness gate</b> runs in the build: the project's Python is type-checked, and a value whose type leaks to <code>Any</code> is an error, not a warning. An <b>ahead-of-time compiler</b> turns typed functions into C and ships them as ordinary CPython extension modules inside the app. No new syntax, no new language: a function compiles or stays in the interpreter, one function at a time.</p></div><div data-l="ko"><p>TypedPython은 python-multiplatform 안에서 두 가지를 합니다. 빌드 안에서 <b>건전성 게이트</b>가 돕니다. 프로젝트의 Python을 타입 검사하고, 타입이 <code>Any</code>로 새는 값은 경고가 아니라 오류입니다. <b>미리 컴파일하는 컴파일러</b>는 타입 붙은 함수를 C로 바꿔 앱 안의 평범한 CPython 확장 모듈로 배포합니다. 새 문법도 새 언어도 없고, 함수 하나씩 컴파일되거나 인터프리터에 남습니다.</p></div></section><section id="problem"><h2><span data-l="en">The problem it solves</span><span data-l="ko">푸는 문제</span></h2><div data-l="en"><p>Fast Python today means one of three things, and none works for apps on every platform. C extensions are a second language and do not exist for most mobile targets. Cython and numba are fast mostly in modes that switch Python's rules off: integers that wrap, bounds that go unchecked, globals frozen at compile time. numba is a JIT, which iOS forbids and native images cannot carry. LPython is a separate language implementation, not an extension for the CPython inside an app.</p></div><div data-l="ko"><p>오늘날 빠른 Python은 셋 중 하나이고, 모든 플랫폼의 앱에서 되는 것은 없습니다. C 확장은 두 번째 언어이고 대부분의 모바일 타깃에는 없습니다. Cython과 numba가 빠른 것은 대부분 Python의 규칙을 끄는 모드에서입니다. 정수가 한 바퀴 돌고, 경계를 검사하지 않고, 전역을 컴파일할 때 얼립니다. numba는 JIT라서 iOS가 금지하고 네이티브 이미지가 품을 수 없습니다. LPython은 별도의 언어 구현이지 앱 안의 CPython을 위한 확장이 아닙니다.</p></div></section><section id="how"><h2><span data-l="en">How it works</span><span data-l="ko">동작 방식</span></h2><div data-l="en"><div class="flow"><div class="step"><b>Check</b>pyrefly over the project; Any leaks are errors</div><div class="arrow">→</div><div class="step"><b>Lower</b>typed functions to an intermediate representation</div><div class="arrow">→</div><div class="step"><b>Prove</b>intervals, ownership, escape</div><div class="arrow">→</div><div class="step"><b>Emit C</b>against the CPython API</div><div class="arrow">→</div><div class="step"><b>Ship</b>an extension module per target</div></div>
+<ul>
+<li><b>Integers</b> are machine words while an interval proof says they fit, and big integers the moment they might not.</li>
+<li><b>Arrays</b> of numbers are read into native buffers and written back, with bounds checks removed only where proved redundant.</li>
+<li><b>Classes</b> are compiled with guards on the type version tag and a dictionary watcher, so a monkey-patched class falls back to the interpreter.</li>
+<li><b>Calls</b> into compiled code take a fast entry when the arguments match and the general path otherwise; nothing raises early.</li>
+<li><b>Long loops</b> poll CPython's own eval breaker, so signals, pending calls and thread switches happen as they would in the interpreter.</li>
+</ul></div><div data-l="ko"><div class="flow"><div class="step"><b>검사</b>프로젝트에 pyrefly, Any 누수는 오류</div><div class="arrow">→</div><div class="step"><b>낮추기</b>타입 붙은 함수를 중간 표현으로</div><div class="arrow">→</div><div class="step"><b>증명</b>구간, 소유권, 탈출</div><div class="arrow">→</div><div class="step"><b>C 생성</b>CPython API 대상</div><div class="arrow">→</div><div class="step"><b>배포</b>타깃마다 확장 모듈</div></div>
+<ul>
+<li><b>정수</b>는 구간 증명이 맞다고 하는 동안 기계어 크기이고, 넘칠 수 있는 순간 큰 정수가 됩니다.</li>
+<li><b>숫자 배열</b>은 네이티브 버퍼로 읽었다가 다시 쓰고, 경계 검사는 필요 없다고 증명된 곳에서만 없앱니다.</li>
+<li><b>클래스</b>는 타입 버전 태그 검사와 딕셔너리 감시자를 붙여 컴파일해서, 실행 중에 클래스를 고치면 인터프리터로 돌아갑니다.</li>
+<li><b>호출</b>은 인자가 맞으면 빠른 입구로, 아니면 일반 경로로 들어가고, 미리 예외를 내지 않습니다.</li>
+<li><b>긴 루프</b>는 CPython 자신의 eval breaker를 확인해서 시그널, 대기 중인 호출, 스레드 전환이 인터프리터에서처럼 일어납니다.</li>
+</ul></div></section><section id="decisions"><h2><span data-l="en">Design decisions</span><span data-l="ko">설계 결정</span></h2><div data-l="en"><ul>
+<li><b>Equivalence is the contract.</b> Results, exceptions and observable behaviour match CPython. The only exception, decided explicitly, is the timing of garbage collection, which the language reference leaves to the implementation.</li>
+<li><b>Speed by proof.</b> No fast-math mode that changes floating-point results.</li>
+<li><b>Ahead of time.</b> Runs on iOS, Android and in GraalVM native images.</li>
+<li><b>Gaps closed in order:</b> faster call entry and inlining, interval proofs, zero-copy buffers, string and dict fast paths, virtual objects, parallel loops.</li>
+</ul></div><div data-l="ko"><ul>
+<li><b>동일성이 계약입니다.</b> 결과, 예외, 관측 가능한 동작이 CPython과 같습니다. 명시적으로 정한 예외는 언어 레퍼런스가 구현에 맡긴 가비지 컬렉션 시점 하나입니다.</li>
+<li><b>증명으로 얻는 속도.</b> 실수 계산 결과를 바꾸는 fast-math 모드는 두지 않습니다.</li>
+<li><b>미리 컴파일.</b> iOS, Android, GraalVM 네이티브 이미지에서 돕니다.</li>
+<li><b>메우는 순서:</b> 빠른 호출 입구와 인라인, 구간 증명, 복사 없는 버퍼, 문자열과 딕셔너리 빠른 경로, 가상 객체, 병렬 루프.</li>
+</ul></div></section><section id="fit"><h2><span data-l="en">Where it fits</span><span data-l="ko">생태계 안의 위치</span></h2><div data-l="en"><p>Its gate runs in the Gradle build through python-multiplatform's plugin; its compiled modules ship through pypackpack's native and mixed build levels. pythonx-graphics uses it for per-frame logic and pythonx-concurrent for parallel work on free-threaded CPython.</p></div><div data-l="ko"><p>게이트는 python-multiplatform의 플러그인을 통해 Gradle 빌드에서 돌고, 컴파일 모듈은 pypackpack의 native와 mixed 빌드 레벨로 배포됩니다. pythonx-graphics는 매 프레임 로직에, pythonx-concurrent는 free-threaded CPython의 병렬 작업에 씁니다.</p></div></section><section id="state"><h2><span data-l="en">Where it stands</span><span data-l="ko">현재 상태</span></h2><div data-l="en"><table><tr><th>Benchmark</th><th>Speed-up over CPython</th><th>Note</th></tr>
 <tr><td>fannkuch</td><td>Rust parity</td><td></td></tr>
-<tr><td>nbody</td><td>31x</td><td>about 2x from Rust; profiling next</td></tr>
-<tr><td>spectral-norm</td><td>6.3x</td><td>goal 10x: call-path shortening, inlining, interval proofs</td></tr></table></section>
-<section><h2>Where it is going</h2>
-<ul>
-<li><b>Free-threaded code by construction.</b> Because the compiler knows which objects a function owns, it locks only what is shared, using CPython's own critical sections, and declares its modules safe to run without the GIL.</li>
-<li><b>Parallel loops.</b> Loops whose iterations are proven independent run across cores on free-threaded CPython.</li>
-<li><b>Virtual objects.</b> Short-lived objects in a hot loop are never materialised unless something could observe them.</li>
-<li><b>The replacement for C extensions.</b> The reason people write C for Python is speed. Typed Python that compiles safely, on every platform, makes that unnecessary for most code.</li>
-</ul></section>
-</div><div data-l="ko">
-<section><h2>무엇인가</h2>
-<p>TypedPython은 python-multiplatform 안에 있고 두 가지 일을 합니다. 첫째, 빌드 안의 건전성 검사입니다. 프로젝트의 Python을 타입 검사하고, 타입이 <code>Any</code>로 새는 값은 경고가 아니라 오류입니다. 둘째, 선택적 컴파일입니다. 타입 붙은 함수를 중간 표현으로 낮추고, C로 컴파일하고, 앱 안의 평범한 CPython 확장 모듈로 배포합니다.</p>
-<p>새 문법도, 새 언어도 없습니다. 함수 하나씩, 컴파일되거나 인터프리터에 남거나 둘 중 하나입니다.</p></section>
-<section><h2>약속: 같은 답, 훨씬 빠르게</h2>
-<p>컴파일된 코드는 CPython과 정확히 똑같이 동작해야 합니다. 넘친 정수는 한 바퀴 돌지 않고 큰 정수가 됩니다. 인덱스 오류는 같은 예외를 냅니다. 긴 루프도 Ctrl-C에 응답하고 다른 스레드에 차례를 줍니다. 컴파일러가 지름길이 안전하다고 증명하지 못하면 그 길로 가지 않습니다.</p>
-<p>흔히 비교하는 도구들과 갈리는 지점이 여기입니다. Cython과 numba가 빠른 것은 대부분 Python의 규칙을 끄는 모드에서입니다. 정수가 한 바퀴 돌고, 경계를 검사하지 않고, 전역 변수를 얼려 둡니다. TypedPython은 규칙을 지키고 속도는 증명으로 얻습니다. 구간 분석으로 필요 없음을 보인 검사를 없애고, 밖으로 나가지 않는 객체는 만들지 않고, 버퍼는 복사 없이 읽습니다. 또 미리 컴파일하기 때문에 JIT가 갈 수 없는 곳, iOS, Android, GraalVM 네이티브 이미지에서 돕니다.</p>
-<table><tr><th>벤치마크</th><th>CPython 대비</th><th>비고</th></tr>
+<tr><td>nbody</td><td>31x</td><td>about 2x from Rust</td></tr>
+<tr><td>spectral-norm</td><td>6.3x</td><td>goal 10x</td></tr></table>
+<p><span class="status-ok">Working</span>: the gate, the compiler on desktop, compiled classes, the CPython test of equivalence (more than 950 cases). <span class="status-wip">In progress</span>: free-threaded code generation on 3.15t, verified to keep the GIL off after import.</p></div><div data-l="ko"><table><tr><th>벤치마크</th><th>CPython 대비</th><th>비고</th></tr>
 <tr><td>fannkuch</td><td>Rust와 대등</td><td></td></tr>
-<tr><td>nbody</td><td>31배</td><td>Rust와 약 2배 차이, 다음은 프로파일</td></tr>
-<tr><td>spectral-norm</td><td>6.3배</td><td>목표 10배: 호출 경로 단축, 인라인, 구간 증명</td></tr></table></section>
-<section><h2>어디로 가는가</h2>
-<ul>
-<li><b>처음부터 free-threaded에 안전한 코드.</b> 컴파일러는 함수가 어떤 객체를 소유하는지 알기 때문에, 공유되는 것만 CPython 자신의 critical section으로 잠그고, 모듈이 GIL 없이 돌아도 안전하다고 선언합니다.</li>
-<li><b>병렬 루프.</b> 반복이 서로 독립이라고 증명된 루프는 free-threaded CPython에서 여러 코어로 나뉘어 돕니다.</li>
-<li><b>가상 객체.</b> 뜨거운 루프 안의 짧게 사는 객체는, 무언가 그것을 관측할 수 있을 때만 실제로 만듭니다.</li>
-<li><b>C 확장의 대체.</b> 사람들이 Python을 위해 C를 쓰는 이유는 속도입니다. 모든 플랫폼에서 안전하게 컴파일되는 타입 붙은 Python이 있으면 대부분의 코드에서 그럴 필요가 없어집니다.</li>
-</ul></section>
-</div>
-<section><h2><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></h2><p><a class="tag" href="../python-multiplatform/">python-multiplatform</a> <a class="tag" href="../pypackpack/">pypackpack</a> <a class="tag" href="../pythonx-graphics/">pythonx-graphics</a> <a class="tag" href="../pythonx-concurrent/">pythonx-concurrent</a></p></section></main>
-<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a></div></footer>
+<tr><td>nbody</td><td>31배</td><td>Rust와 약 2배 차이</td></tr>
+<tr><td>spectral-norm</td><td>6.3배</td><td>목표 10배</td></tr></table>
+<p><span class="status-ok">동작</span>: 게이트, 데스크톱 컴파일러, 클래스 컴파일, CPython 동일성 테스트(950개 이상). <span class="status-wip">진행 중</span>: 3.15t의 free-threaded 코드 생성. import 뒤에도 GIL이 꺼진 상태로 남는 것을 확인했습니다.</p></div></section><section id="future"><h2><span data-l="en">Future design</span><span data-l="ko">미래 설계</span></h2><div data-l="en"><ul>
+<li><b>Free-threaded by construction.</b> The compiler knows which objects a function owns, locks only shared ones with CPython's critical sections, and declares its modules safe without the GIL.</li>
+<li><b>Parallel loops</b> whose iterations are proven independent run across cores.</li>
+<li><b>Virtual objects</b>: short-lived objects are not allocated unless something could observe them.</li>
+<li><b>The end of C extensions for most code</b>: typed Python becomes the way to make Python fast, on every platform.</li>
+</ul></div><div data-l="ko"><ul>
+<li><b>처음부터 free-threaded.</b> 컴파일러는 함수가 소유한 객체를 알아서 공유되는 것만 CPython의 critical section으로 잠그고, 모듈이 GIL 없이 안전하다고 선언합니다.</li>
+<li><b>병렬 루프.</b> 반복이 독립이라고 증명된 루프는 여러 코어에서 돕니다.</li>
+<li><b>가상 객체.</b> 짧게 사는 객체는 무언가 관측할 수 있을 때만 만듭니다.</li>
+<li><b>대부분의 코드에서 C 확장의 끝.</b> 타입 붙은 Python이 모든 플랫폼에서 Python을 빠르게 하는 방법이 됩니다.</li>
+</ul></div></section><section id="roadmap"><h2><span data-l="en">Roadmap</span><span data-l="ko">로드맵</span></h2><div data-l="en"><ol><li>M1, 2026-10-17: the gate as a default build step.</li><li>M2, 2026-11-07: desktop compiler targets (spectral-norm 10x, trace events).</li><li>M3, 2026-11-30: compiled modules shipped through pypackpack, usable in apps.</li></ol></div><div data-l="ko"><ol><li>M1, 2026-10-17: 게이트를 기본 빌드 단계로.</li><li>M2, 2026-11-07: 데스크톱 컴파일러 목표(spectral-norm 10배, trace 이벤트).</li><li>M3, 2026-11-30: pypackpack으로 배포되는 컴파일 모듈, 앱에서 사용 가능.</li></ol></div></section><section id="related"><h2><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></h2><div data-l="en"><p><a class="tag" href="../python-multiplatform/">python-multiplatform</a> <a class="tag" href="../pypackpack/">pypackpack</a> <a class="tag" href="../pythonx-graphics/">pythonx-graphics</a> <a class="tag" href="../pythonx-concurrent/">pythonx-concurrent</a></p></div><div data-l="ko"><p><a class="tag" href="../python-multiplatform/">python-multiplatform</a> <a class="tag" href="../pypackpack/">pypackpack</a> <a class="tag" href="../pythonx-graphics/">pythonx-graphics</a> <a class="tag" href="../pythonx-concurrent/">pythonx-concurrent</a></p></div></section></div></div></main>
+<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a> · <a href="../../#projects"><span data-l="en">All projects</span><span data-l="ko">전체 프로젝트</span></a></div></footer>
 </body></html>
