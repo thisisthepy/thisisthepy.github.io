@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>pypackpack | thisisthepy</title><meta name="description" content="Build once for every platform: the Python half of an app, resolved and compiled for each target. Command: ppp.">
+<link rel="stylesheet" href="../../assets/site.css"><script src="../../assets/site.js"></script></head>
+<body><header class="top"><div class="wrap"><a class="brand" href="../../">this<span>is</span>thepy</a><nav class="links">
+<a href="../../#vision"><span data-l="en">Vision</span><span data-l="ko">비전</span></a>
+<a href="../../#stack"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a>
+<a class="hide-sm" href="../../#principles"><span data-l="en">Principles</span><span data-l="ko">원칙</span></a>
+<a class="hide-sm" href="https://github.com/thisisthepy">GitHub</a>
+<button class="lang" id="lang" type="button">한국어</button></nav></div></header>
+<main class="wrap"><div class="crumbs"><a href="../../"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a> / pypackpack</div>
+<div class="hero" style="padding-top:24px"><div class="kicker">Build and ship</div><h1>pypackpack</h1>
+<p class="lead"><span data-l="en">Build once for every platform: the Python half of an app, resolved and compiled for each target. Command: ppp.</span><span data-l="ko">한 번 빌드해 모든 플랫폼으로: 앱의 Python 절반을 타깃마다 해석하고 컴파일합니다. 명령은 ppp입니다.</span></p>
+<p style="margin-top:14px;font-size:14px"><a href="https://github.com/thisisthepy/pypackpack">GitHub</a> · <a href="https://thisisthepy.github.io/pypackpack/">Guide</a> · <a href="https://pypi.org/project/pypackpack/">PyPI</a></p></div>
+<div data-l="en">
+<section><h2>What it is</h2>
+<p>An app's Python code has dependencies, and on a phone those dependencies have to be built for that phone. pypackpack, the <code>ppp</code> command, does that for every target at once: it pins and fetches a verified Python, resolves dependencies separately for Android, iOS, desktop and the web (including wheels built for mobile), compiles C and C++ extensions, and bundles the result as resources an app can carry.</p>
+<p>It is built on uv for resolution and compiles to a native executable with GraalVM, so it installs as one command with no Java needed.</p></section>
+<section><h2>Build levels</h2>
+<p>A package can ship at four levels: <b>instant</b> (source), <b>bytecode</b>, <b>native</b> (compiled extensions) and <b>mixed</b>. <code>ppp build</code> checks dependencies, compiles and bundles in one step, and deploys by kind: libraries go to PyPI, apps go to FastTrack, the fast path for shipping code updates to apps.</p></section>
+<section><h2>Where it is going</h2>
+<ul>
+<li><b>A Cargo backend.</b> Rust crates built as Python extension modules for every target, so Rust is a first-class way to make Python fast in an app. torchnative is the first package that will build this way.</li>
+<li><b>TypedPython's output as a build level.</b> Compiled modules from TypedPython shipped through the native and mixed levels.</li>
+<li><b>Free-threaded and the web.</b> CPython 3.15t and its stable ABI for free-threaded builds (abi3t) as the baseline, with WebAssembly in the first release; dependencies that would turn the GIL back on are reported at build time.</li>
+</ul></section>
+</div><div data-l="ko">
+<section><h2>무엇인가</h2>
+<p>앱의 Python 코드에는 의존성이 있고, 휴대폰에서는 그 의존성을 그 휴대폰용으로 빌드해야 합니다. <code>ppp</code> 명령인 pypackpack이 그 일을 모든 타깃에 한꺼번에 합니다. 검증된 Python을 고정해 가져오고, Android, iOS, 데스크톱, 웹마다 따로 의존성을 해석하고(모바일용으로 빌드한 휠 포함), C와 C++ 확장을 컴파일하고, 결과를 앱이 품을 수 있는 리소스로 묶습니다.</p>
+<p>해석은 uv 위에서 하고, GraalVM으로 네이티브 실행 파일이 되어서 Java 없이 명령 하나로 설치됩니다.</p></section>
+<section><h2>빌드 레벨</h2>
+<p>패키지는 네 레벨로 배포할 수 있습니다. <b>instant</b>(소스), <b>bytecode</b>, <b>native</b>(컴파일된 확장), <b>mixed</b>입니다. <code>ppp build</code>가 의존성 확인, 컴파일, 번들을 한 단계로 하고, 종류에 따라 배포합니다. 라이브러리는 PyPI로, 앱은 앱에 코드 업데이트를 빠르게 보내는 경로인 FastTrack으로 갑니다.</p></section>
+<section><h2>어디로 가는가</h2>
+<ul>
+<li><b>Cargo 백엔드.</b> Rust 크레이트를 모든 타깃용 Python 확장 모듈로 빌드합니다. 앱에서 Python을 빠르게 만드는 일급 방법이 Rust가 됩니다. torchnative가 이 방식으로 빌드될 첫 패키지입니다.</li>
+<li><b>TypedPython 출력을 빌드 레벨로.</b> TypedPython이 컴파일한 모듈을 native와 mixed 레벨로 배포합니다.</li>
+<li><b>free-threaded와 웹.</b> CPython 3.15t와 free-threaded 빌드용 안정 ABI(abi3t)가 기준이고, WebAssembly는 첫 릴리스에 들어갑니다. GIL을 다시 켜는 의존성은 빌드할 때 알려 줍니다.</li>
+</ul></section>
+</div>
+<section><h2><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></h2><p><a class="tag" href="../toolchain/">toolchain</a> <a class="tag" href="../typedpython/">TypedPython</a> <a class="tag" href="../torchnative/">torchnative</a> <a class="tag" href="../python-multiplatform/">python-multiplatform</a></p></section></main>
+<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a></div></footer>
+</body></html>

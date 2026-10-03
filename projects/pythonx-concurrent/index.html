@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>pythonx-concurrent | thisisthepy</title><meta name="description" content="Structured concurrency for Python on Kotlin Multiplatform: coroutines that interoperate with Kotlin coroutines and asyncio.">
+<link rel="stylesheet" href="../../assets/site.css"><script src="../../assets/site.js"></script></head>
+<body><header class="top"><div class="wrap"><a class="brand" href="../../">this<span>is</span>thepy</a><nav class="links">
+<a href="../../#vision"><span data-l="en">Vision</span><span data-l="ko">비전</span></a>
+<a href="../../#stack"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a>
+<a class="hide-sm" href="../../#principles"><span data-l="en">Principles</span><span data-l="ko">원칙</span></a>
+<a class="hide-sm" href="https://github.com/thisisthepy">GitHub</a>
+<button class="lang" id="lang" type="button">한국어</button></nav></div></header>
+<main class="wrap"><div class="crumbs"><a href="../../"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a> / pythonx-concurrent</div>
+<div class="hero" style="padding-top:24px"><div class="kicker">pythonx</div><h1>pythonx-concurrent</h1>
+<p class="lead"><span data-l="en">Structured concurrency for Python on Kotlin Multiplatform: coroutines that interoperate with Kotlin coroutines and asyncio.</span><span data-l="ko">Kotlin Multiplatform 위 Python의 구조적 동시성: Kotlin 코루틴, asyncio와 함께 도는 코루틴.</span></p>
+<p style="margin-top:14px;font-size:14px"><a href="https://github.com/thisisthepy/pythonx-concurrent">GitHub</a> · <a href="https://github.com/thisisthepy/pythonx-concurrent/blob/develop/docs/SPEC.md">Spec</a></p></div>
+<div data-l="en">
+<section><h2>The idea</h2>
+<p>On Android, work runs in Kotlin coroutines; in Python, it runs in asyncio. An app written in Python on Kotlin Multiplatform lives in both worlds. pythonx-concurrent gives it one model with Kotlin's vocabulary in Python's spelling: a <code>Scope</code> used with <code>async with</code>, <code>launch</code> and <code>defer</code>, <code>with_context(Dispatchers.IO, ...)</code>, timeouts and supervision, and cancellation that crosses the language boundary in both directions.</p>
+<pre><code>async with Scope() as s:
+    profile = s.defer(fetch_profile, user_id)
+    s.launch(log_visit, user_id)
+    data = await with_context(Dispatchers.IO, read_cache, user_id)</code></pre></section>
+<section><h2>The innovative part</h2>
+<ul>
+<li><b>Goroutine-style scheduling</b> of many lightweight tasks over a few carrier threads, parallel on free-threaded CPython.</li>
+<li><b>Python on Kotlin's threads.</b> In Kotlin mode a Python coroutine is stepped by a Kotlin coroutine, one <code>send()</code> at a time, on any Kotlin dispatcher. Between steps it holds no GIL and no native frame, so it can live on JVM virtual threads and move between threads, which asyncio tasks cannot.</li>
+<li><b>Threads in the browser.</b> With cross-origin isolation by default, the same dispatchers run on worker threads on the web.</li>
+</ul></section>
+<section><h2>Status</h2><p>Specification written in detail; implementation comes in the pythonx turn. The name is reserved on PyPI.</p></section>
+</div><div data-l="ko">
+<section><h2>아이디어</h2>
+<p>Android에서 작업은 Kotlin 코루틴으로, Python에서는 asyncio로 돕니다. Kotlin Multiplatform 위에서 Python으로 쓴 앱은 두 세계에 동시에 삽니다. pythonx-concurrent는 Kotlin의 어휘를 Python 표기로 쓰는 하나의 모델을 줍니다. <code>async with</code>로 쓰는 <code>Scope</code>, <code>launch</code>와 <code>defer</code>, <code>with_context(Dispatchers.IO, ...)</code>, 타임아웃과 감독, 그리고 언어 경계를 양방향으로 넘는 취소입니다.</p>
+<pre><code>async with Scope() as s:
+    profile = s.defer(fetch_profile, user_id)
+    s.launch(log_visit, user_id)
+    data = await with_context(Dispatchers.IO, read_cache, user_id)</code></pre></section>
+<section><h2>새로운 부분</h2>
+<ul>
+<li><b>고루틴 방식의 스케줄링.</b> 가벼운 작업 여러 개를 몇 개의 캐리어 스레드에 얹고, free-threaded CPython에서는 병렬로 돌립니다.</li>
+<li><b>Kotlin 스레드 위의 Python.</b> Kotlin 모드에서는 Kotlin 코루틴이 Python 코루틴을 <code>send()</code> 한 번씩, 어떤 Kotlin 디스패처에서든 실행합니다. 단계 사이에는 GIL도 네이티브 프레임도 쥐지 않아서 JVM 가상 스레드 위에서 살 수 있고, asyncio 태스크와 달리 스레드 사이를 옮겨 다닐 수 있습니다.</li>
+<li><b>브라우저의 스레드.</b> 교차 출처 격리가 기본이라 같은 디스패처가 웹의 워커 스레드에서도 돕니다.</li>
+</ul></section>
+<section><h2>상태</h2><p>스펙을 자세히 써 두었고, 구현은 pythonx 차례에 합니다. PyPI 이름은 선점해 두었습니다.</p></section>
+</div>
+<section><h2><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></h2><p><a class="tag" href="../python-multiplatform/">python-multiplatform</a> <a class="tag" href="../pythonx-compose/">pythonx-compose</a> <a class="tag" href="../pythonx-graphics/">pythonx-graphics</a> <a class="tag" href="../typedpython/">TypedPython</a></p></section></main>
+<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a></div></footer>
+</body></html>

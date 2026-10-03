@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>toolchain | thisisthepy</title><meta name="description" content="A Gradle plugin that puts Python into a Kotlin Multiplatform app, and tcl, a one-verb installer for everyone else.">
+<link rel="stylesheet" href="../../assets/site.css"><script src="../../assets/site.js"></script></head>
+<body><header class="top"><div class="wrap"><a class="brand" href="../../">this<span>is</span>thepy</a><nav class="links">
+<a href="../../#vision"><span data-l="en">Vision</span><span data-l="ko">비전</span></a>
+<a href="../../#stack"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a>
+<a class="hide-sm" href="../../#principles"><span data-l="en">Principles</span><span data-l="ko">원칙</span></a>
+<a class="hide-sm" href="https://github.com/thisisthepy">GitHub</a>
+<button class="lang" id="lang" type="button">한국어</button></nav></div></header>
+<main class="wrap"><div class="crumbs"><a href="../../"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a> / toolchain</div>
+<div class="hero" style="padding-top:24px"><div class="kicker">Build and ship</div><h1>toolchain</h1>
+<p class="lead"><span data-l="en">A Gradle plugin that puts Python into a Kotlin Multiplatform app, and tcl, a one-verb installer for everyone else.</span><span data-l="ko">Kotlin Multiplatform 앱에 Python을 넣는 Gradle 플러그인, 그리고 나머지 모두를 위한 한 단어 설치기 tcl.</span></p>
+<p style="margin-top:14px;font-size:14px"><a href="https://github.com/thisisthepy/toolchain">GitHub</a> · <a href="https://thisisthepy.github.io/toolchain/">Guide</a> · <a href="https://pypi.org/project/toolchain-lite/">PyPI</a></p></div>
+<div data-l="en">
+<section><h2>What it is</h2>
+<p>toolchain is where a Kotlin build learns about Python. Its Gradle plugin adds a <code>python { }</code> block: name the Python version and the dependencies, and the plugin stages the interpreter, installs the dependencies per target through pypackpack, and packs everything into the desktop jar, the Android APK and the iOS app. Hot reload sends changed Python to a running app.</p>
+<p>For people with no Gradle project, <b>tcl</b> (the <code>toolchain-lite</code> package on PyPI) does the install step with one verb: <code>tcl install</code>.</p></section>
+<section><h2>Where it is going</h2>
+<ul>
+<li><b>Published plugin</b>, so any Kotlin Multiplatform app can apply it from a public repository.</li>
+<li><b>CPython 3.15t by default</b>, including the free-threaded interpreters we build for Android and iOS.</li>
+<li><b>The web, isolated by default.</b> For WebAssembly apps the plugin emits the cross-origin isolation headers threads need, for the dev server and for hosting, with a service-worker fallback for hosts that cannot set headers.</li>
+</ul></section>
+</div><div data-l="ko">
+<section><h2>무엇인가</h2>
+<p>toolchain은 Kotlin 빌드가 Python을 알게 되는 곳입니다. Gradle 플러그인이 <code>python { }</code> 블록을 더합니다. Python 버전과 의존성을 적으면 플러그인이 인터프리터를 준비하고, pypackpack으로 타깃마다 의존성을 설치하고, 모두를 데스크톱 jar, Android APK, iOS 앱에 넣습니다. 핫 리로드는 바뀐 Python을 실행 중인 앱에 보냅니다.</p>
+<p>Gradle 프로젝트가 없는 사람에게는 <b>tcl</b>(PyPI의 <code>toolchain-lite</code> 패키지)이 설치 단계를 한 단어로 합니다. <code>tcl install</code>.</p></section>
+<section><h2>어디로 가는가</h2>
+<ul>
+<li><b>플러그인 공개 배포.</b> 어떤 Kotlin Multiplatform 앱이든 공개 저장소에서 적용할 수 있게 합니다.</li>
+<li><b>기본 CPython 3.15t.</b> 우리가 Android와 iOS용으로 빌드하는 free-threaded 인터프리터를 포함합니다.</li>
+<li><b>격리가 기본인 웹.</b> WebAssembly 앱을 위해 스레드에 필요한 교차 출처 격리 헤더를 개발 서버와 호스팅용으로 생성하고, 헤더를 정할 수 없는 호스트에는 서비스 워커 대체를 넣습니다.</li>
+</ul></section>
+</div>
+<section><h2><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></h2><p><a class="tag" href="../pypackpack/">pypackpack</a> <a class="tag" href="../python-multiplatform/">python-multiplatform</a></p></section></main>
+<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a></div></footer>
+</body></html>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>pythonx-graphics | thisisthepy</title><meta name="description" content="Declarative 2D and 3D graphics for Python: Compose for 2D, Filament for 3D, and scenes built for AI agents.">
+<link rel="stylesheet" href="../../assets/site.css"><script src="../../assets/site.js"></script></head>
+<body><header class="top"><div class="wrap"><a class="brand" href="../../">this<span>is</span>thepy</a><nav class="links">
+<a href="../../#vision"><span data-l="en">Vision</span><span data-l="ko">비전</span></a>
+<a href="../../#stack"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a>
+<a class="hide-sm" href="../../#principles"><span data-l="en">Principles</span><span data-l="ko">원칙</span></a>
+<a class="hide-sm" href="https://github.com/thisisthepy">GitHub</a>
+<button class="lang" id="lang" type="button">한국어</button></nav></div></header>
+<main class="wrap"><div class="crumbs"><a href="../../"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a> / pythonx-graphics</div>
+<div class="hero" style="padding-top:24px"><div class="kicker">pythonx</div><h1>pythonx-graphics</h1>
+<p class="lead"><span data-l="en">Declarative 2D and 3D graphics for Python: Compose for 2D, Filament for 3D, and scenes built for AI agents.</span><span data-l="ko">Python을 위한 선언형 2D·3D 그래픽스: 2D는 Compose, 3D는 Filament, 그리고 AI 에이전트를 위한 장면.</span></p>
+<p style="margin-top:14px;font-size:14px"><a href="https://github.com/thisisthepy/pythonx-graphics">GitHub</a> · <a href="https://github.com/thisisthepy/pythonx-graphics/blob/develop/docs/SPEC.md">Spec</a></p></div>
+<div data-l="en">
+<section><h2>The idea</h2>
+<p>A replacement for three.js, for Python apps on every platform, with one model for 2D and 3D. A 3D scene is a Compose composition whose nodes are entities of Filament, Google's physically based renderer for Vulkan, Metal and OpenGL. Python declares cameras, lights, models and behaviours the way it declares UI, and Compose HUDs sit over 3D views, driven by the same state.</p>
+<pre><code>Scene3D(camera=Camera(position=(0, 1.5, 4), look_at=(0, 0, 0)), content=lambda: {
+    Sun(intensity=100_000, direction=(-1, -1, -1)),
+    Model("models/chair.glb", name="chair", behaviours=[Spin(axis=(0, 1, 0), speed=30)]),
+})</code></pre></section>
+<section><h2>Two design ideas</h2>
+<h3>Motion is declared, so Python stays off the frame loop</h3>
+<p>Tweens, springs, paths, physics and constraints are data that the native side runs every frame. Python runs on events. Per-frame logic that must be Python is compiled by TypedPython and parallelised on free-threaded CPython. Ten thousand instances come from one array, with no Python object per instance.</p>
+<h3>Every scene is a document an agent can work on</h3>
+<ul>
+<li>A typed scene representation with stable ids, round-tripping to the Python declaration.</li>
+<li>Descriptions and queries for language models, with spatial relations computed from bounds.</li>
+<li>Grounding in pixels through an entity-id buffer and depth, so "the red chair" in an image becomes a node.</li>
+<li>Edits as transactions: validated against schemas and app-defined constraints, previewed, undoable, and emitted as source patches that can be reviewed and committed.</li>
+<li>Tool schemas generated from the components; headless, deterministic rendering; recording and replay.</li>
+</ul></section>
+<section><h2>Status</h2><p>Specification written; implementation comes in the pythonx turn. The name is reserved on PyPI.</p></section>
+</div><div data-l="ko">
+<section><h2>아이디어</h2>
+<p>모든 플랫폼의 Python 앱을 위한 three.js 대체이고, 2D와 3D가 같은 모델입니다. 3D 장면은 노드가 Filament 엔티티인 Compose 컴포지션입니다. Filament는 Vulkan, Metal, OpenGL을 쓰는 Google의 물리 기반 렌더러입니다. Python은 카메라, 조명, 모델, 행동을 UI처럼 선언하고, Compose HUD가 같은 상태를 보며 3D 화면 위에 겹칩니다.</p>
+<pre><code>Scene3D(camera=Camera(position=(0, 1.5, 4), look_at=(0, 0, 0)), content=lambda: {
+    Sun(intensity=100_000, direction=(-1, -1, -1)),
+    Model("models/chair.glb", name="chair", behaviours=[Spin(axis=(0, 1, 0), speed=30)]),
+})</code></pre></section>
+<section><h2>두 가지 설계</h2>
+<h3>움직임을 선언하니 Python은 프레임 루프에 없다</h3>
+<p>트윈, 스프링, 경로, 물리, 제약은 네이티브가 매 프레임 실행하는 데이터입니다. Python은 이벤트가 있을 때만 돕니다. 매 프레임 Python이어야 하는 로직은 TypedPython이 컴파일하고 free-threaded CPython에서 병렬로 돌립니다. 인스턴스 1만 개도 배열 하나에서 나오고, 인스턴스마다 Python 객체를 만들지 않습니다.</p>
+<h3>모든 장면은 에이전트가 다룰 수 있는 문서다</h3>
+<ul>
+<li>안정적인 ID를 가진 타입 있는 장면 표현이고, Python 선언과 서로 바꿔 쓸 수 있습니다.</li>
+<li>언어 모델을 위한 설명과 질의, 경계 상자로 계산한 공간 관계.</li>
+<li>엔티티 ID 버퍼와 깊이로 픽셀에 연결해서, 이미지 속 "빨간 의자"가 노드가 됩니다.</li>
+<li>트랜잭션으로 수정합니다. 스키마와 앱이 정한 제약으로 검증하고, 미리 보고, 되돌릴 수 있고, 리뷰하고 커밋할 수 있는 소스 패치로 나옵니다.</li>
+<li>컴포넌트에서 생성하는 도구 스키마, 창 없는 결정적 렌더링, 기록과 재생.</li>
+</ul></section>
+<section><h2>상태</h2><p>스펙을 써 두었고, 구현은 pythonx 차례에 합니다. PyPI 이름은 선점해 두었습니다.</p></section>
+</div>
+<section><h2><span data-l="en">Connected projects</span><span data-l="ko">연결된 프로젝트</span></h2><p><a class="tag" href="../pythonx-compose/">pythonx-compose</a> <a class="tag" href="../typedpython/">TypedPython</a> <a class="tag" href="../pythonx-concurrent/">pythonx-concurrent</a> <a class="tag" href="../torchnative/">torchnative</a></p></section></main>
+<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a></div></footer>
+</body></html>
