@@ -1,90 +1,91 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>thisisthepy</title><meta name="description" content="A Python that runs everywhere Kotlin runs: native apps, AI and graphics in Python, on Android, iOS, desktop and the web.">
+<title>thisisthepy</title><meta name="description" content="A Python that runs everywhere Kotlin runs: native apps, on-device AI and interactive graphics written in Python, on Android, iOS, desktop and the web.">
 <link rel="stylesheet" href="assets/site.css"><script src="assets/site.js"></script></head>
 <body><header class="top"><div class="wrap"><a class="brand" href="">this<span>is</span>thepy</a><nav class="links">
-<a href="#vision"><span data-l="en">Vision</span><span data-l="ko">비전</span></a>
-<a href="#stack"><span data-l="en">Ecosystem</span><span data-l="ko">생태계</span></a>
-<a class="hide-sm" href="#principles"><span data-l="en">Principles</span><span data-l="ko">원칙</span></a>
+<a href="#problem"><span data-l="en">Why</span><span data-l="ko">왜</span></a>
+<a href="#architecture"><span data-l="en">Architecture</span><span data-l="ko">구조</span></a>
+<a href="#projects"><span data-l="en">Projects</span><span data-l="ko">프로젝트</span></a>
+<a class="hide-sm" href="#future"><span data-l="en">Future</span><span data-l="ko">미래</span></a>
 <a class="hide-sm" href="https://github.com/thisisthepy">GitHub</a>
 <button class="lang" id="lang" type="button">한국어</button></nav></div></header>
 <main class="wrap">
 <div class="hero">
   <div class="kicker">thisisthepy</div>
   <h1><span data-l="en">A Python that runs everywhere Kotlin runs.</span><span data-l="ko">Kotlin이 도는 모든 곳에서 도는 Python.</span></h1>
-  <p class="lead"><span data-l="en">Native apps, on-device AI and interactive graphics, written in Python, shipped to Android, iOS, desktop and the web. Not through a web view and not through a second runtime bolted on the side: CPython embedded in Kotlin Multiplatform, talking to Kotlin in both directions, built by one toolchain.</span><span data-l="ko">네이티브 앱, 온디바이스 AI, 인터랙티브 그래픽스를 Python으로 쓰고 Android, iOS, 데스크톱, 웹에 배포합니다. 웹뷰도 아니고 옆에 따로 붙인 런타임도 아닙니다. Kotlin Multiplatform 안에 CPython을 넣고, Kotlin과 양방향으로 대화하게 하고, 하나의 도구 체인으로 빌드합니다.</span></p>
+  <p class="lead"><span data-l="en">thisisthepy is a family of open-source projects that make Python a first-class language for building real applications on Android, iOS, desktop and the web. CPython is embedded in Kotlin Multiplatform, the two languages call each other in both directions, one toolchain builds and ships the result, and a set of Python libraries turns the Kotlin ecosystem into something that feels like Python.</span><span data-l="ko">thisisthepy는 Python을 Android, iOS, 데스크톱, 웹에서 진짜 애플리케이션을 만드는 일급 언어로 만드는 오픈소스 프로젝트 모음입니다. CPython을 Kotlin Multiplatform 안에 넣고, 두 언어가 양방향으로 서로를 부르게 하고, 하나의 도구 체인으로 빌드하고 배포하며, 일련의 Python 라이브러리가 Kotlin 생태계를 Python답게 쓰게 합니다.</span></p>
 </div>
-
-<section id="vision">
-<h2><span data-l="en">Why this exists</span><span data-l="ko">왜 만드는가</span></h2>
-<div data-l="en">
-<p>Python is where most people learn to program, where data and AI work happens, and where notebooks let you change a running program one cell at a time. It is also the language that cannot ship an app. A Python programmer who wants a phone app is told to learn Kotlin or Swift first, and a model that runs in a notebook has to be rewritten before it can run on a device.</p>
-<p>Kotlin Multiplatform solved the other half of the problem: one codebase, real native UI through Compose Multiplatform, on every platform that matters. thisisthepy joins the two. The bet is simple: if Python can call every Kotlin library under its own name, and Kotlin can call Python back, then the whole Kotlin ecosystem becomes Python's standard library for apps, and Python becomes a first-class language for building them.</p>
-<p>From there the ambitions grow. Python that is as fast as compiled code when you add types. Python that runs on every core, because the interpreter we ship is becoming free-threaded everywhere. Python that drives a 3D scene an AI agent can read and edit. All of it on the device in your hand.</p>
-</div>
-<div data-l="ko">
-<p>Python은 많은 사람이 처음 프로그래밍을 배우는 언어이고, 데이터와 AI 작업이 이루어지는 언어이며, 노트북에서 셀 하나씩 실행 중인 프로그램을 바꿀 수 있는 언어입니다. 그런데 앱을 배포하지는 못합니다. 휴대폰 앱을 만들고 싶은 Python 개발자는 먼저 Kotlin이나 Swift를 배우라는 말을 듣고, 노트북에서 돌던 모델은 기기에서 돌리려면 다시 작성해야 합니다.</p>
-<p>Kotlin Multiplatform은 반대쪽 절반을 풀었습니다. 코드베이스 하나로, Compose Multiplatform의 진짜 네이티브 UI로, 중요한 모든 플랫폼에 배포합니다. thisisthepy는 이 둘을 잇습니다. 내기는 단순합니다. Python이 모든 Kotlin 라이브러리를 원래 이름 그대로 부를 수 있고 Kotlin이 Python을 다시 부를 수 있다면, Kotlin 생태계 전체가 Python의 앱 표준 라이브러리가 되고, Python은 앱을 만드는 일급 언어가 됩니다.</p>
-<p>거기서 목표가 커집니다. 타입을 붙이면 컴파일된 코드만큼 빠른 Python. 모든 코어를 쓰는 Python. 우리가 배포하는 인터프리터를 모든 곳에서 free-threaded로 바꾸고 있습니다. AI 에이전트가 읽고 고칠 수 있는 3D 장면을 움직이는 Python. 이 모든 것이 손에 든 기기 위에서 돕니다.</p>
-</div>
-</section>
-
-<section id="stack">
-<h2><span data-l="en">How the pieces fit</span><span data-l="ko">조각들이 맞물리는 방식</span></h2>
+<div class="layout"><aside class="toc"><b><span data-l="en">On this page</span><span data-l="ko">이 페이지</span></b><a href="#problem"><span data-l="en">The problem</span><span data-l="ko">풀려는 문제</span></a><a href="#approach"><span data-l="en">The approach</span><span data-l="ko">접근 방식</span></a><a href="#architecture"><span data-l="en">Architecture</span><span data-l="ko">구조</span></a><a href="#lifecycle"><span data-l="en">An app's life, end to end</span><span data-l="ko">앱 하나의 일생</span></a><a href="#projects"><span data-l="en">The projects</span><span data-l="ko">프로젝트</span></a><a href="#principles"><span data-l="en">Principles</span><span data-l="ko">원칙</span></a><a href="#future"><span data-l="en">The future we are designing</span><span data-l="ko">설계하는 미래</span></a><a href="#roadmap"><span data-l="en">Roadmap</span><span data-l="ko">로드맵</span></a><a href="#glossary"><span data-l="en">Glossary</span><span data-l="ko">용어</span></a></aside><div><section id="problem"><h2><span data-l="en">The problem</span><span data-l="ko">풀려는 문제</span></h2><div data-l="en">
+<p>Python is the language most people learn first, the language of data and machine learning, and the language of notebooks, where a running program is changed one cell at a time. Three things keep it out of the applications people actually use.</p>
+<ol>
+<li><b>Python cannot ship an app.</b> A Python programmer who wants a phone app is told to learn Kotlin or Swift. Existing bridges either draw their own non-native widgets, run inside a web view, or wrap each platform API by hand and fall behind.</li>
+<li><b>Models stop at the notebook.</b> A model that works in a notebook is rewritten, converted or moved to a server before it can run on a phone. PyTorch itself does not ship on most devices.</li>
+<li><b>Python is slow and single-core where apps need speed.</b> The usual answers are C extensions, which do not exist for mobile, or tools that change Python's rules, and the GIL keeps Python on one core.</li>
+</ol>
+<p>Kotlin Multiplatform has already solved the platform half: one codebase, native UI through Compose Multiplatform, Android, iOS, desktop and the web. thisisthepy brings Python into that world instead of building a parallel one.</p></div><div data-l="ko">
+<p>Python은 많은 사람이 처음 배우는 언어이고, 데이터와 머신러닝의 언어이며, 실행 중인 프로그램을 셀 하나씩 바꾸는 노트북의 언어입니다. 그런데 세 가지가 Python을 사람들이 실제로 쓰는 애플리케이션에서 밀어냅니다.</p>
+<ol>
+<li><b>Python으로는 앱을 배포할 수 없습니다.</b> 휴대폰 앱을 만들고 싶은 Python 개발자는 Kotlin이나 Swift를 배우라는 말을 듣습니다. 기존 다리들은 네이티브가 아닌 자체 위젯을 그리거나, 웹뷰 안에서 돌거나, 플랫폼 API를 손으로 하나씩 감싸다가 뒤처집니다.</li>
+<li><b>모델은 노트북에서 멈춥니다.</b> 노트북에서 도는 모델을 휴대폰에서 돌리려면 다시 쓰거나, 변환하거나, 서버로 옮겨야 합니다. PyTorch 자체는 대부분의 기기에 들어가지 않습니다.</li>
+<li><b>앱이 속도를 필요로 하는 곳에서 Python은 느리고 한 코어만 씁니다.</b> 흔한 해법은 모바일에는 없는 C 확장이거나 Python의 규칙을 바꾸는 도구이고, GIL은 Python을 한 코어에 묶어 둡니다.</li>
+</ol>
+<p>플랫폼 쪽 절반은 Kotlin Multiplatform이 이미 풀었습니다. 코드베이스 하나, Compose Multiplatform의 네이티브 UI, 그리고 Android, iOS, 데스크톱, 웹. thisisthepy는 평행한 세계를 따로 만들지 않고 Python을 그 세계 안으로 데려갑니다.</p></div></section><section id="approach"><h2><span data-l="en">The approach</span><span data-l="ko">접근 방식</span></h2><div data-l="en">
+<p>The ecosystem rests on four bets. Each project exists to make one of them true.</p>
+<div class="two">
+<div class="card"><h3>1. The Kotlin ecosystem is Python's standard library for apps</h3><p>Instead of wrapping platform APIs for Python one by one, make every Kotlin library callable from Python under its own name, generated from the compiled library at build time. Compose, Jetpack, kotlinx and every third-party Kotlin library become available the day they ship.</p></div>
+<div class="card"><h3>2. Real CPython, everywhere</h3><p>Not a Python-like language and not a reimplementation: the reference interpreter, unmodified, so every extension, wheel and semantic rule applies. On every platform the same interpreter, in its free-threaded build.</p></div>
+<div class="card"><h3>3. One build for every platform</h3><p>The Python half of an app is resolved, compiled and bundled for each target by the same tool that builds the Kotlin half, so shipping to a phone is a build setting, not a port.</p></div>
+<div class="card"><h3>4. Python that is declarative, fast and parallel</h3><p>Screens and scenes are declared; typed code is compiled without changing its meaning; threads run Python on every core. The language people already know becomes the one they can ship.</p></div>
+</div></div><div data-l="ko">
+<p>생태계는 네 가지 내기 위에 섭니다. 각 프로젝트는 그중 하나를 참으로 만들기 위해 있습니다.</p>
+<div class="two">
+<div class="card"><h3>1. Kotlin 생태계가 Python의 앱 표준 라이브러리다</h3><p>플랫폼 API를 Python용으로 하나씩 감싸지 않고, 모든 Kotlin 라이브러리를 원래 이름 그대로 Python에서 부를 수 있게 합니다. 빌드할 때 컴파일된 라이브러리에서 생성합니다. Compose, Jetpack, kotlinx, 그리고 모든 서드파티 Kotlin 라이브러리를 나오는 날부터 씁니다.</p></div>
+<div class="card"><h3>2. 어디서나 진짜 CPython</h3><p>Python 비슷한 언어도, 재구현도 아닙니다. 고치지 않은 기준 인터프리터라서 모든 확장, 휠, 의미 규칙이 그대로 적용됩니다. 모든 플랫폼에서 같은 인터프리터를, free-threaded 빌드로 씁니다.</p></div>
+<div class="card"><h3>3. 모든 플랫폼을 위한 하나의 빌드</h3><p>앱의 Python 절반을 Kotlin 절반을 빌드하는 같은 도구가 타깃마다 해석하고, 컴파일하고, 묶습니다. 휴대폰으로 배포하는 것은 포팅이 아니라 빌드 설정 하나입니다.</p></div>
+<div class="card"><h3>4. 선언형이고, 빠르고, 병렬인 Python</h3><p>화면과 장면은 선언하고, 타입 붙은 코드는 의미를 바꾸지 않고 컴파일하고, 스레드가 모든 코어에서 Python을 실행합니다. 사람들이 이미 아는 언어가 배포할 수 있는 언어가 됩니다.</p></div>
+</div></div></section><section id="architecture"><h2><span data-l="en">Architecture</span><span data-l="ko">구조</span></h2><div data-l="en">
 <div class="stack">
-  <div class="layer l1"><b><span data-l="en">Apps</span><span data-l="ko">앱</span></b><div class="items"><a href="projects/gemstone/">Gemstone</a><span data-l="en">your app</span><span data-l="ko">여러분의 앱</span></div></div>
-  <div class="layer l2"><b><span data-l="en">pythonx: Python language extensions</span><span data-l="ko">pythonx: Python 언어 확장</span></b><div class="items"><a href="projects/pythonx-compose/">pythonx-compose</a><a href="projects/pythonx-concurrent/">pythonx-concurrent</a><a href="projects/pythonx-graphics/">pythonx-graphics</a><a href="projects/pythonx-platform/">pythonx-platform</a></div></div>
-  <div class="layer l3"><b><span data-l="en">Language and runtime</span><span data-l="ko">언어와 런타임</span></b><div class="items"><a href="projects/python-multiplatform/">python-multiplatform</a><a href="projects/typedpython/">TypedPython</a><a href="projects/torchnative/">torchnative</a></div></div>
-  <div class="layer l4"><b><span data-l="en">Build and ship</span><span data-l="ko">빌드와 배포</span></b><div class="items"><a href="projects/pypackpack/">pypackpack (ppp)</a><a href="projects/toolchain/">toolchain (Gradle, tcl)</a></div></div>
-  <div class="layer l5"><b><span data-l="en">Foundation</span><span data-l="ko">토대</span></b><div class="items"><span>CPython 3.15t (free-threaded)</span><span>Kotlin Multiplatform</span><span>Compose Multiplatform</span><a href="projects/compose-multiplatform-core-extended/">compose-multiplatform-core-extended</a></div></div>
+  <div class="layer l1"><b><span data-l="en">5. Apps</span><span data-l="ko">5. 앱</span></b><div class="items"><a href="projects/gemstone/">Gemstone</a><span data-l="en">your app</span><span data-l="ko">여러분의 앱</span></div></div>
+  <div class="layer l2"><b><span data-l="en">4. pythonx: Python language extensions</span><span data-l="ko">4. pythonx: Python 언어 확장</span></b><div class="items"><a href="projects/pythonx-compose/">pythonx-compose</a><a href="projects/pythonx-concurrent/">pythonx-concurrent</a><a href="projects/pythonx-graphics/">pythonx-graphics</a><a href="projects/pythonx-platform/">pythonx-platform</a></div></div>
+  <div class="layer l3"><b><span data-l="en">3. Language and runtime</span><span data-l="ko">3. 언어와 런타임</span></b><div class="items"><a href="projects/python-multiplatform/">python-multiplatform</a><a href="projects/typedpython/">TypedPython</a><a href="projects/torchnative/">torchnative</a></div></div>
+  <div class="layer l4"><b><span data-l="en">2. Build and ship</span><span data-l="ko">2. 빌드와 배포</span></b><div class="items"><a href="projects/pypackpack/">pypackpack (ppp)</a><a href="projects/toolchain/">toolchain (Gradle plugin, tcl)</a></div></div>
+  <div class="layer l5"><b><span data-l="en">1. Foundation</span><span data-l="ko">1. 토대</span></b><div class="items"><span>CPython 3.15t</span><span>Kotlin Multiplatform</span><span>Compose Multiplatform</span><a href="projects/compose-multiplatform-core-extended/">compose-multiplatform-core-extended</a></div></div>
 </div>
-<div data-l="en">
-<p>Read it from the bottom. <b>CPython</b> is the interpreter, unmodified, in its free-threaded build. <b>Kotlin Multiplatform</b> and <b>Compose Multiplatform</b> give every platform a native host and a native UI. <b>python-multiplatform</b> embeds the interpreter in that host and builds the bridge: Kotlin calls Python through the C API, Python calls Kotlin through a function table generated at build time. <b>pypackpack</b> resolves and builds the Python half of an app for each target, and <b>toolchain</b> puts it inside the Kotlin build, so a <code>python { }</code> block in Gradle is all an app needs.</p>
-<p>On top of that bridge sit the <b>pythonx</b> packages, Python language extensions in the spirit of androidx and kotlinx. They import Kotlin libraries under their own names and make them feel like Python: Compose as decorated functions, coroutines as structured scopes, a 3D renderer as a declarative scene. They all install into one shared <code>pythonx</code> namespace package, so an app picks the ones it needs and they sit side by side. <b>TypedPython</b> compiles the parts that must be fast, and <b>torchnative</b> brings PyTorch-style models to devices that have no PyTorch.</p>
+<h3>The five layers</h3>
+<ol>
+<li><b>Foundation.</b> CPython is the interpreter, moving to the free-threaded 3.15 build on every platform. Kotlin Multiplatform gives each platform a native host process and Compose Multiplatform a native UI. compose-multiplatform-core-extended adds the multiplatform androidx libraries the ecosystem needs and Compose does not ship.</li>
+<li><b>Build and ship.</b> pypackpack resolves and builds the Python half of an app for every target, including the C, C++ and Rust extensions it depends on. The toolchain Gradle plugin puts that result, and the interpreter, inside the Kotlin build.</li>
+<li><b>Language and runtime.</b> python-multiplatform embeds the interpreter and is the bridge between the two languages. TypedPython, inside it, compiles typed Python. torchnative runs machine-learning models through a Rust runtime.</li>
+<li><b>pythonx.</b> Python libraries in the spirit of androidx and kotlinx, sharing one <code>pythonx</code> namespace package. Each imports Kotlin libraries through the bridge and gives them a Python shape: declarative UI, structured concurrency, declarative graphics, device features.</li>
+<li><b>Apps.</b> Applications written mostly or entirely in Python. Gemstone is the ecosystem's own.</li>
+</ol>
+<h3>How a call crosses the bridge</h3>
+<div class="flow"><div class="step"><b>Kotlin to Python</b>One <code>expect</code> function per CPython C API call, about 330, implemented per platform</div><div class="arrow">→</div><div class="step"><b>Android</b>JNI natives registered with RegisterNatives</div><div class="step"><b>Desktop</b>Foreign Function and Memory API, invokeExact</div><div class="step"><b>iOS</b>Kotlin/Native direct calls</div><div class="step"><b>Web</b>WebAssembly imports</div></div>
+<div class="flow"><div class="step"><b>Python to Kotlin</b>A call on a Kotlin-named module or proxy</div><div class="arrow">→</div><div class="step"><b>Function table</b>Generated at build time by KSP (app sources) and by the artifact walker (any compiled jar or klib)</div><div class="arrow">→</div><div class="step"><b>One entry point</b>per platform, then Kotlin code compiled by kotlinc, never looked up by name</div></div>
+<h3>How an app is built</h3>
+<div class="flow"><div class="step"><b>Gradle</b><code>python { }</code> block in the app's build</div><div class="arrow">→</div><div class="step"><b>toolchain</b>stages CPython 3.15t per target</div><div class="arrow">→</div><div class="step"><b>pypackpack</b>resolves and builds dependencies per target, compiles extensions</div><div class="arrow">→</div><div class="step"><b>bindings</b>tables and <code>.pyi</code> stubs generated</div><div class="arrow">→</div><div class="step"><b>package</b>APK, iOS app, desktop jar, web bundle</div></div></div><div data-l="ko">
+<div class="stack">
+  <div class="layer l1"><b><span data-l="en">5. Apps</span><span data-l="ko">5. 앱</span></b><div class="items"><a href="projects/gemstone/">Gemstone</a><span data-l="en">your app</span><span data-l="ko">여러분의 앱</span></div></div>
+  <div class="layer l2"><b><span data-l="en">4. pythonx: Python language extensions</span><span data-l="ko">4. pythonx: Python 언어 확장</span></b><div class="items"><a href="projects/pythonx-compose/">pythonx-compose</a><a href="projects/pythonx-concurrent/">pythonx-concurrent</a><a href="projects/pythonx-graphics/">pythonx-graphics</a><a href="projects/pythonx-platform/">pythonx-platform</a></div></div>
+  <div class="layer l3"><b><span data-l="en">3. Language and runtime</span><span data-l="ko">3. 언어와 런타임</span></b><div class="items"><a href="projects/python-multiplatform/">python-multiplatform</a><a href="projects/typedpython/">TypedPython</a><a href="projects/torchnative/">torchnative</a></div></div>
+  <div class="layer l4"><b><span data-l="en">2. Build and ship</span><span data-l="ko">2. 빌드와 배포</span></b><div class="items"><a href="projects/pypackpack/">pypackpack (ppp)</a><a href="projects/toolchain/">toolchain (Gradle plugin, tcl)</a></div></div>
+  <div class="layer l5"><b><span data-l="en">1. Foundation</span><span data-l="ko">1. 토대</span></b><div class="items"><span>CPython 3.15t</span><span>Kotlin Multiplatform</span><span>Compose Multiplatform</span><a href="projects/compose-multiplatform-core-extended/">compose-multiplatform-core-extended</a></div></div>
 </div>
-<div data-l="ko">
-<p>아래에서부터 읽으면 됩니다. <b>CPython</b>은 고치지 않은 원래 인터프리터이고, free-threaded 빌드입니다. <b>Kotlin Multiplatform</b>과 <b>Compose Multiplatform</b>이 모든 플랫폼에 네이티브 호스트와 네이티브 UI를 줍니다. <b>python-multiplatform</b>이 그 호스트 안에 인터프리터를 넣고 다리를 놓습니다. Kotlin은 C API로 Python을 부르고, Python은 빌드 시점에 생성한 함수 표로 Kotlin을 부릅니다. <b>pypackpack</b>은 앱의 Python 절반을 타깃마다 해석하고 빌드하며, <b>toolchain</b>은 그것을 Kotlin 빌드 안에 넣습니다. 그래서 앱에 필요한 것은 Gradle의 <code>python { }</code> 블록 하나입니다.</p>
-<p>그 다리 위에 <b>pythonx</b> 패키지들이 있습니다. androidx, kotlinx와 같은 정신의 Python 언어 확장입니다. Kotlin 라이브러리를 원래 이름 그대로 가져와 Python답게 만듭니다. Compose는 데코레이터 붙은 함수로, 코루틴은 구조적 스코프로, 3D 렌더러는 선언형 장면으로. 모두 하나의 <code>pythonx</code> 네임스페이스 패키지에 설치되어서, 앱은 필요한 것만 골라 나란히 씁니다. 빨라야 하는 부분은 <b>TypedPython</b>이 컴파일하고, <b>torchnative</b>는 PyTorch가 없는 기기에 PyTorch 방식의 모델을 가져갑니다.</p>
-</div>
-<div class="grid"><a class="card" href="projects/python-multiplatform/" style="display:block;color:inherit;text-decoration:none">
-<h3>python-multiplatform</h3><p><span data-l="en">CPython embedded in Kotlin Multiplatform, with Kotlin and Python calling each other in both directions.</span><span data-l="ko">Kotlin Multiplatform 안에 CPython을 넣고, Kotlin과 Python이 서로를 양방향으로 부르게 합니다.</span></p>
-<span class="tag">Language and runtime</span></a>
-<a class="card" href="projects/typedpython/" style="display:block;color:inherit;text-decoration:none">
-<h3>TypedPython</h3><p><span data-l="en">Ordinary typed Python, checked at build time and compiled ahead of time, with CPython's exact semantics.</span><span data-l="ko">평범한 타입 붙은 Python을 빌드 시점에 검사하고 미리 컴파일합니다. 의미는 CPython과 정확히 같습니다.</span></p>
-<span class="tag">Language and runtime</span></a>
-<a class="card" href="projects/torchnative/" style="display:block;color:inherit;text-decoration:none">
-<h3>torchnative</h3><p><span data-l="en">PyTorch-style models on devices without PyTorch: a Rust runtime behind the API people already use.</span><span data-l="ko">PyTorch가 없는 기기에서 PyTorch 방식의 모델을: 사람들이 이미 쓰는 API 뒤에 Rust 런타임을 둡니다.</span></p>
-<span class="tag">Language and runtime</span></a>
-<a class="card" href="projects/pypackpack/" style="display:block;color:inherit;text-decoration:none">
-<h3>pypackpack</h3><p><span data-l="en">Build once for every platform: the Python half of an app, resolved and compiled for each target. Command: ppp.</span><span data-l="ko">한 번 빌드해 모든 플랫폼으로: 앱의 Python 절반을 타깃마다 해석하고 컴파일합니다. 명령은 ppp입니다.</span></p>
-<span class="tag">Build and ship</span></a>
-<a class="card" href="projects/toolchain/" style="display:block;color:inherit;text-decoration:none">
-<h3>toolchain</h3><p><span data-l="en">A Gradle plugin that puts Python into a Kotlin Multiplatform app, and tcl, a one-verb installer for everyone else.</span><span data-l="ko">Kotlin Multiplatform 앱에 Python을 넣는 Gradle 플러그인, 그리고 나머지 모두를 위한 한 단어 설치기 tcl.</span></p>
-<span class="tag">Build and ship</span></a>
-<a class="card" href="projects/pythonx-compose/" style="display:block;color:inherit;text-decoration:none">
-<h3>pythonx-compose</h3><p><span data-l="en">Build Compose Multiplatform UIs in Python: Python Declarative UI Framework.</span><span data-l="ko">Python으로 Compose Multiplatform UI를 만듭니다: Python 선언형 UI 프레임워크.</span></p>
-<span class="tag">pythonx</span></a>
-<a class="card" href="projects/pythonx-concurrent/" style="display:block;color:inherit;text-decoration:none">
-<h3>pythonx-concurrent</h3><p><span data-l="en">Structured concurrency for Python on Kotlin Multiplatform: coroutines that interoperate with Kotlin coroutines and asyncio.</span><span data-l="ko">Kotlin Multiplatform 위 Python의 구조적 동시성: Kotlin 코루틴, asyncio와 함께 도는 코루틴.</span></p>
-<span class="tag">pythonx</span></a>
-<a class="card" href="projects/pythonx-graphics/" style="display:block;color:inherit;text-decoration:none">
-<h3>pythonx-graphics</h3><p><span data-l="en">Declarative 2D and 3D graphics for Python: Compose for 2D, Filament for 3D, and scenes built for AI agents.</span><span data-l="ko">Python을 위한 선언형 2D·3D 그래픽스: 2D는 Compose, 3D는 Filament, 그리고 AI 에이전트를 위한 장면.</span></p>
-<span class="tag">pythonx</span></a>
-<a class="card" href="projects/pythonx-platform/" style="display:block;color:inherit;text-decoration:none">
-<h3>pythonx-platform</h3><p><span data-l="en">Device features for Python apps: notifications, camera, sensors, file picker and permissions, as one API.</span><span data-l="ko">Python 앱을 위한 기기 기능: 알림, 카메라, 센서, 파일 선택, 권한을 하나의 API로.</span></p>
-<span class="tag">pythonx</span></a>
-<a class="card" href="projects/compose-multiplatform-core-extended/" style="display:block;color:inherit;text-decoration:none">
-<h3>compose-multiplatform-core-extended</h3><p><span data-l="en">Jetpack extension libraries under the androidx namespace, made multiplatform: the Kotlin ground the pythonx packages stand on.</span><span data-l="ko">androidx 네임스페이스 아래의 Jetpack 확장 라이브러리를 멀티플랫폼으로: pythonx 패키지가 딛는 Kotlin 바닥.</span></p>
-<span class="tag">Foundation</span></a>
-<a class="card" href="projects/gemstone/" style="display:block;color:inherit;text-decoration:none">
-<h3>Gemstone</h3><p><span data-l="en">A local alternative to Ollama: one engine serving many models, with a chat app on every platform.</span><span data-l="ko">Ollama의 로컬 대안: 여러 모델을 서빙하는 엔진 하나와 모든 플랫폼의 채팅 앱.</span></p>
-<span class="tag">Apps</span></a></div>
-</section>
-
-<section id="journey">
-<h2><span data-l="en">One app, end to end</span><span data-l="ko">앱 하나가 만들어지는 길</span></h2>
-<div data-l="en">
-<p>A notebook cell declares a screen:</p>
+<h3>다섯 계층</h3>
+<ol>
+<li><b>토대.</b> CPython이 인터프리터이고, 모든 플랫폼에서 free-threaded 3.15 빌드로 옮겨 가고 있습니다. Kotlin Multiplatform이 플랫폼마다 네이티브 호스트 프로세스를, Compose Multiplatform이 네이티브 UI를 줍니다. compose-multiplatform-core-extended는 생태계에 필요하지만 Compose가 제공하지 않는 멀티플랫폼 androidx 라이브러리를 더합니다.</li>
+<li><b>빌드와 배포.</b> pypackpack이 앱의 Python 절반을 모든 타깃용으로 해석하고 빌드합니다. 의존하는 C, C++, Rust 확장도 포함합니다. toolchain Gradle 플러그인이 그 결과와 인터프리터를 Kotlin 빌드 안에 넣습니다.</li>
+<li><b>언어와 런타임.</b> python-multiplatform이 인터프리터를 넣고 두 언어 사이의 다리가 됩니다. 그 안의 TypedPython이 타입 붙은 Python을 컴파일합니다. torchnative는 Rust 런타임으로 머신러닝 모델을 돌립니다.</li>
+<li><b>pythonx.</b> androidx, kotlinx와 같은 정신의 Python 라이브러리이고, 하나의 <code>pythonx</code> 네임스페이스 패키지를 함께 씁니다. 각각 다리를 통해 Kotlin 라이브러리를 가져와 Python의 모양을 줍니다. 선언형 UI, 구조적 동시성, 선언형 그래픽스, 기기 기능입니다.</li>
+<li><b>앱.</b> 대부분 또는 전부를 Python으로 쓴 애플리케이션입니다. Gemstone이 생태계의 대표 앱입니다.</li>
+</ol>
+<h3>호출이 다리를 건너는 방식</h3>
+<div class="flow"><div class="step"><b>Kotlin에서 Python으로</b>CPython C API 호출마다 <code>expect</code> 함수 하나, 약 330개, 플랫폼마다 구현</div><div class="arrow">→</div><div class="step"><b>Android</b>RegisterNatives로 등록한 JNI 네이티브</div><div class="step"><b>데스크톱</b>Foreign Function and Memory API, invokeExact</div><div class="step"><b>iOS</b>Kotlin/Native 직접 호출</div><div class="step"><b>웹</b>WebAssembly import</div></div>
+<div class="flow"><div class="step"><b>Python에서 Kotlin으로</b>Kotlin 이름의 모듈이나 프록시를 호출</div><div class="arrow">→</div><div class="step"><b>함수 표</b>빌드할 때 KSP(앱 소스)와 아티팩트 워커(컴파일된 jar, klib)가 생성</div><div class="arrow">→</div><div class="step"><b>진입점 하나</b>플랫폼마다 하나. 그 뒤는 kotlinc가 컴파일한 코드이고 이름으로 찾지 않음</div></div>
+<h3>앱이 빌드되는 방식</h3>
+<div class="flow"><div class="step"><b>Gradle</b>앱 빌드의 <code>python { }</code> 블록</div><div class="arrow">→</div><div class="step"><b>toolchain</b>타깃마다 CPython 3.15t 준비</div><div class="arrow">→</div><div class="step"><b>pypackpack</b>타깃마다 의존성 해석과 빌드, 확장 컴파일</div><div class="arrow">→</div><div class="step"><b>바인딩</b>함수 표와 <code>.pyi</code> 스텁 생성</div><div class="arrow">→</div><div class="step"><b>패키지</b>APK, iOS 앱, 데스크톱 jar, 웹 번들</div></div></div></section><section id="lifecycle"><h2><span data-l="en">An app's life, end to end</span><span data-l="ko">앱 하나의 일생</span></h2><div data-l="en">
+<h3>1. Write</h3>
+<p>A screen is a Python function. Widgets are Compose's own, reached through the bridge under their Kotlin names, with snake_case keywords.</p>
 <pre><code>from pythonx.compose.runtime import Composable, app, remember_saveable
 from pythonx.compose.material3 import Text, Button
 
@@ -92,12 +93,18 @@ from pythonx.compose.material3 import Text, Button
 @Composable
 def App():
     App.messages = messages = remember_saveable("Hello from Python")
-    Text(messages.getValue())</code></pre>
-<p>The next cell writes <code>main.App.messages.setValue("changed")</code> and the running window changes within a frame. Redeclaring <code>App</code> replaces the screen; there is no update call. <code>Text</code> is Compose's own <code>Text</code>, reached through python-multiplatform's binder under its Kotlin name; its parameters are also reachable in snake_case. The state is Compose's <code>rememberSaveable</code>, so it survives rotation and process death on Android like any Kotlin app's state.</p>
-<p>The same module ships: pypackpack bundles it for each target, the toolchain plugin puts it into the APK, the iOS app and the desktop jar, and the embedded CPython runs it. Nothing in the app had to be written in Kotlin.</p>
-</div>
-<div data-l="ko">
-<p>노트북 셀 하나가 화면을 선언합니다.</p>
+    Button(on_click=lambda: messages.setValue("clicked"),
+           content=lambda: Text(messages.getValue()))</code></pre>
+<h3>2. Iterate in a notebook</h3>
+<p>With the app running, a notebook cell writes <code>main.App.messages.setValue("changed")</code> and the window updates within a frame. Redeclaring <code>App</code> in a cell replaces the screen. There is no update function: the screen is declared, and redeclaring is how it changes.</p>
+<h3>3. Make the hot parts fast</h3>
+<p>A function with full type annotations can be compiled by TypedPython into a native extension that keeps CPython's exact behaviour. A model can be loaded with torchnative through the Hugging Face API.</p>
+<h3>4. Build for every platform</h3>
+<p>The app's Gradle build has a <code>python { }</code> block. One build produces the Android APK, the iOS app, the desktop package and the web bundle, each with its interpreter, its Python code and its dependencies built for that target.</p>
+<h3>5. Ship and update</h3>
+<p>Libraries are published to PyPI; apps ship through the stores, and their Python code can be updated through FastTrack, pypackpack's fast path for app code. During development, hot reload sends changed Python to a running app.</p></div><div data-l="ko">
+<h3>1. 쓴다</h3>
+<p>화면은 Python 함수입니다. 위젯은 Compose 자신의 것이고, 다리를 통해 Kotlin 이름 그대로 닿으며, 키워드는 snake_case로 씁니다.</p>
 <pre><code>from pythonx.compose.runtime import Composable, app, remember_saveable
 from pythonx.compose.material3 import Text, Button
 
@@ -105,47 +112,91 @@ from pythonx.compose.material3 import Text, Button
 @Composable
 def App():
     App.messages = messages = remember_saveable("Hello from Python")
-    Text(messages.getValue())</code></pre>
-<p>다음 셀에서 <code>main.App.messages.setValue("changed")</code>를 쓰면 실행 중인 창이 한 프레임 안에 바뀝니다. <code>App</code>을 다시 선언하면 화면이 바뀌고, 업데이트 함수는 없습니다. <code>Text</code>는 Compose의 진짜 <code>Text</code>이고, python-multiplatform의 바인더가 Kotlin 이름 그대로 내보내며 인자는 snake_case로도 받습니다. 상태는 Compose의 <code>rememberSaveable</code>이라서, Kotlin 앱의 상태처럼 Android에서 화면 회전과 프로세스 종료 뒤에도 살아남습니다.</p>
-<p>같은 모듈이 그대로 배포됩니다. pypackpack이 타깃마다 묶고, toolchain 플러그인이 APK, iOS 앱, 데스크톱 jar에 넣고, 안에 들어간 CPython이 실행합니다. 앱에서 Kotlin으로 써야 했던 코드는 없습니다.</p>
-</div>
-</section>
-
-<section id="principles">
-<h2><span data-l="en">Principles we hold to</span><span data-l="ko">지키는 원칙</span></h2>
-<div data-l="en"><ul>
-<li><b>The original names, always.</b> A Kotlin name in Python means the original Kotlin. <code>androidx.compose</code> is androidx; nothing is renamed to look Pythonic. What changes is spelling inside a module: members and keywords are also reachable in snake_case.</li>
-<li><b>Built at build time, not discovered at run time.</b> Python reaches Kotlin through a table generated by KSP and by an artifact walker that reads compiled jars and klibs. No reflection, no name lookup, so the same app works in a GraalVM native image and on Kotlin/Native.</li>
-<li><b>CPython, not a Python-like language.</b> Every extension, every wheel and every semantic rule of CPython applies. When we compile Python, the result must behave exactly as CPython would.</li>
-<li><b>Free-threaded, and only free-threaded.</b> The interpreter moves to CPython 3.15t, with no GIL, on every platform including the web; there will be no GIL build. Parallelism comes from threads, not from sub-interpreters.</li>
-<li><b>Declarative over imperative.</b> Screens are declared, scenes are declared, motion is declared. Redeclaring is how things change.</li>
-<li><b>Tests that can fail.</b> Every claim is backed by a test that was seen failing first, and by pixels where pixels are the claim.</li>
-</ul></div>
-<div data-l="ko"><ul>
-<li><b>원래 이름 그대로.</b> Python에서 보이는 Kotlin 이름은 원래 Kotlin을 뜻합니다. <code>androidx.compose</code>는 androidx이고, Python처럼 보이게 하려고 이름을 바꾸지 않습니다. 바뀌는 것은 모듈 안의 표기뿐입니다. 멤버와 키워드 인자는 snake_case로도 부를 수 있습니다.</li>
-<li><b>실행 중에 찾지 않고 빌드할 때 만든다.</b> Python은 KSP와, 컴파일된 jar와 klib을 읽는 아티팩트 워커가 생성한 표를 통해 Kotlin에 닿습니다. 리플렉션도 이름 검색도 없어서, 같은 앱이 GraalVM 네이티브 이미지와 Kotlin/Native에서 그대로 돕니다.</li>
-<li><b>Python 비슷한 언어가 아니라 CPython.</b> CPython의 모든 확장, 모든 휠, 모든 의미 규칙이 그대로 적용됩니다. Python을 컴파일할 때도 결과는 CPython과 똑같이 동작해야 합니다.</li>
-<li><b>free-threaded, 그것만.</b> 인터프리터를 웹을 포함한 모든 플랫폼에서 GIL 없는 CPython 3.15t로 옮기고 있고, GIL 빌드는 두지 않습니다. 병렬성은 서브 인터프리터가 아니라 스레드에서 옵니다.</li>
-<li><b>명령형보다 선언형.</b> 화면도, 장면도, 움직임도 선언합니다. 바꾸고 싶으면 다시 선언합니다.</li>
-<li><b>실패할 수 있는 테스트.</b> 모든 주장은 먼저 실패하는 것을 본 테스트로 뒷받침하고, 화면이 주장이면 픽셀로 증명합니다.</li>
-</ul></div>
-</section>
-
-<section id="horizon">
-<h2><span data-l="en">Where it is going</span><span data-l="ko">어디로 가는가</span></h2>
-<div class="grid">
-<div class="card"><h3><span data-l="en">Fast Python without a new language</span><span data-l="ko">새 언어 없이 빠른 Python</span></h3><p><span data-l="en">TypedPython compiles ordinary typed Python ahead of time into extensions that run on phones and in native images, with CPython's exact semantics: big integers, bounds checks, exceptions, signals. Already at Rust's speed on fannkuch.</span><span data-l="ko">TypedPython은 평범한 타입 붙은 Python을 미리 컴파일해 휴대폰과 네이티브 이미지에서 도는 확장으로 만듭니다. 큰 정수, 경계 검사, 예외, 시그널까지 CPython과 똑같은 의미를 지킵니다. fannkuch에서는 이미 Rust와 같은 속도입니다.</span></p></div>
-<div class="card"><h3><span data-l="en">Every core, on every device</span><span data-l="ko">모든 기기의 모든 코어</span></h3><p><span data-l="en">Free-threaded CPython everywhere, built by us for Android, iOS and the browser, with compiled code that declares itself thread-safe and parallelises independent loops.</span><span data-l="ko">Android, iOS, 브라우저용으로 직접 빌드한 free-threaded CPython을 모든 곳에 씁니다. 컴파일된 코드는 스스로 스레드 안전을 선언하고, 서로 독립적인 루프를 병렬로 돌립니다.</span></p></div>
-<div class="card"><h3><span data-l="en">Graphics an agent can work on</span><span data-l="ko">에이전트가 다룰 수 있는 그래픽스</span></h3><p><span data-l="en">pythonx-graphics treats every scene as a typed document: describable, queryable, grounded in pixels through an entity-id buffer, edited by validated and undoable transactions, rendered headless and replayed.</span><span data-l="ko">pythonx-graphics는 모든 장면을 타입이 있는 문서로 다룹니다. 설명하고, 질의하고, 엔티티 ID 버퍼로 픽셀과 연결하고, 검증되고 되돌릴 수 있는 트랜잭션으로 고치고, 창 없이 렌더링하고, 재생할 수 있습니다.</span></p></div>
-<div class="card"><h3><span data-l="en">Models on the device</span><span data-l="ko">기기 위의 모델</span></h3><p><span data-l="en">torchnative runs Hugging Face models through the API people already use, from_pretrained to generate, with streaming and continuous batching, on CPU, Metal, Vulkan and NPUs.</span><span data-l="ko">torchnative는 사람들이 이미 쓰는 API 그대로, from_pretrained부터 generate까지 Hugging Face 모델을 돌립니다. 스트리밍과 연속 배칭을 지원하고 CPU, Metal, Vulkan, NPU에서 돕니다.</span></p></div>
-</div>
-</section>
-
-<section id="now">
-<h2><span data-l="en">What we are finishing now</span><span data-l="ko">지금 마무리하는 순서</span></h2>
-<div data-l="en"><p>The projects are finished one at a time, in this order: torchnative, python-multiplatform with TypedPython, pypackpack and toolchain, pythonx-compose, then the other pythonx packages and Gemstone. The pythonx packages that are still specifications have reserved their names and published their designs, linked from their pages.</p></div>
-<div data-l="ko"><p>프로젝트는 이 순서대로 하나씩 마무리합니다. torchnative, TypedPython을 포함한 python-multiplatform, pypackpack과 toolchain, pythonx-compose, 그다음 나머지 pythonx 패키지와 Gemstone입니다. 아직 스펙 단계인 pythonx 패키지들은 이름을 선점하고 설계를 공개해 두었고, 각 페이지에서 연결됩니다.</p></div>
-</section>
-</main>
-<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a></div></footer>
+    Button(on_click=lambda: messages.setValue("clicked"),
+           content=lambda: Text(messages.getValue()))</code></pre>
+<h3>2. 노트북에서 다듬는다</h3>
+<p>앱이 실행 중일 때 노트북 셀에서 <code>main.App.messages.setValue("changed")</code>를 쓰면 한 프레임 안에 창이 바뀝니다. 셀에서 <code>App</code>을 다시 선언하면 화면이 바뀝니다. 업데이트 함수는 없습니다. 화면은 선언하는 것이고, 바꾸고 싶으면 다시 선언합니다.</p>
+<h3>3. 뜨거운 부분을 빠르게 한다</h3>
+<p>타입이 다 붙은 함수는 TypedPython이 CPython과 정확히 같은 동작을 지키는 네이티브 확장으로 컴파일합니다. 모델은 torchnative로 Hugging Face API 그대로 불러옵니다.</p>
+<h3>4. 모든 플랫폼용으로 빌드한다</h3>
+<p>앱의 Gradle 빌드에 <code>python { }</code> 블록이 있습니다. 빌드 한 번으로 Android APK, iOS 앱, 데스크톱 패키지, 웹 번들이 나오고, 각각 그 타깃용으로 빌드된 인터프리터, Python 코드, 의존성을 품습니다.</p>
+<h3>5. 배포하고 갱신한다</h3>
+<p>라이브러리는 PyPI로 배포하고, 앱은 스토어로 배포하며, 앱의 Python 코드는 pypackpack의 앱 코드 빠른 경로인 FastTrack으로 갱신할 수 있습니다. 개발 중에는 핫 리로드가 바뀐 Python을 실행 중인 앱에 보냅니다.</p></div></section><section id="projects"><h2><span data-l="en">The projects</span><span data-l="ko">프로젝트</span></h2><div data-l="en"><p>Every project, its layer, its role and where it stands. Each name links to a page about its design.</p><table><tr><th>Project</th><th>Layer</th><th>Role</th><th>State and next release</th></tr><tr><td><a href="projects/python-multiplatform/">python-multiplatform</a></td><td>Language and runtime</td><td>The bridge: embeds CPython, Kotlin to Python and Python to Kotlin calls, the binder, the Compose host</td><td>Desktop, Android, iOS working; web experimental. Next: free-threaded 3.15t, 11-30</td></tr><tr><td><a href="projects/typedpython/">TypedPython</a></td><td>Language and runtime</td><td>Type gate in the build, ahead-of-time compiler from typed Python to CPython extensions</td><td>Compiler working on desktop; free-threaded code generation in progress. Next: M3, 11-30</td></tr><tr><td><a href="projects/torchnative/">torchnative</a></td><td>Language and runtime</td><td>On-device machine learning: the PyTorch and transformers API over a Rust runtime</td><td>Generation, streaming and batching on CPU; 0.1.0b5 targeted for 2026-10-24</td></tr><tr><td><a href="projects/pypackpack/">pypackpack</a></td><td>Build and ship</td><td>Per-target dependency resolution, extension builds, bundles and deploys for the Python half of apps</td><td>0.2.0 ready to publish; 0.3.0 (native level) targeted 2026-11-30</td></tr><tr><td><a href="projects/toolchain/">toolchain</a></td><td>Build and ship</td><td>The python { } block in Gradle: interpreter staging, per-target dependencies, packaging, hot reload</td><td>Desktop and Android working; toolchain-lite 0.1.0 ready; plugin 1.0.0-alpha01 targeted 2026-11-30</td></tr><tr><td><a href="projects/pythonx-compose/">pythonx-compose</a></td><td>pythonx</td><td>Declarative UI in Python on real Compose: decorated composables, a declared app root, saved state</td><td>Lecture notebook runs end to end; 0.1.0a2 ready; 0.1.0b1 targeted 2026-11-20</td></tr><tr><td><a href="projects/pythonx-concurrent/">pythonx-concurrent</a></td><td>pythonx</td><td>Kotlin-style scopes, dispatchers and cancellation in Python, bridging asyncio and Kotlin coroutines</td><td>Specified; name reserved; implementation in the pythonx turn</td></tr><tr><td><a href="projects/pythonx-graphics/">pythonx-graphics</a></td><td>pythonx</td><td>A three.js replacement for Python apps, with scenes that agents can describe, ground, edit and replay</td><td>Specified; name reserved; implementation in the pythonx turn</td></tr><tr><td><a href="projects/pythonx-platform/">pythonx-platform</a></td><td>pythonx</td><td>A thin Pythonic layer over multiplatform androidx device libraries</td><td>Intent recorded; name reserved; first Kotlin library planned</td></tr><tr><td><a href="projects/compose-multiplatform-core-extended/">compose-multiplatform-core-extended</a></td><td>Foundation</td><td>Multiplatform androidx libraries Compose Multiplatform does not ship: design system, device features</td><td>Design-system migration in progress; OS notifications planned</td></tr><tr><td><a href="projects/gemstone/">Gemstone</a></td><td>Apps</td><td>The flagship app: multi-model local serving, OpenAI and Ollama APIs, chat on every platform</td><td>Server and desktop, web, Android app working; iOS builds; 1.1.0 next</td></tr></table></div><div data-l="ko"><p>모든 프로젝트와 그 계층, 역할, 현재 위치입니다. 이름을 누르면 그 프로젝트의 설계를 설명하는 페이지로 갑니다.</p><table><tr><th>프로젝트</th><th>계층</th><th>역할</th><th>상태와 다음 출시</th></tr><tr><td><a href="projects/python-multiplatform/">python-multiplatform</a></td><td>Language and runtime</td><td>다리: CPython 임베드, 양방향 호출, 바인더, Compose 호스트</td><td>데스크톱, Android, iOS 동작, 웹 실험 단계. 다음: free-threaded 3.15t, 11-30</td></tr><tr><td><a href="projects/typedpython/">TypedPython</a></td><td>Language and runtime</td><td>빌드 안의 타입 게이트, 타입 붙은 Python을 CPython 확장으로 미리 컴파일</td><td>데스크톱에서 컴파일러 동작, free-threaded 코드 생성 진행 중. 다음: M3, 11-30</td></tr><tr><td><a href="projects/torchnative/">torchnative</a></td><td>Language and runtime</td><td>온디바이스 머신러닝: Rust 런타임 위의 PyTorch와 transformers API</td><td>CPU에서 생성, 스트리밍, 배칭. 0.1.0b5 목표 2026-10-24</td></tr><tr><td><a href="projects/pypackpack/">pypackpack</a></td><td>Build and ship</td><td>앱의 Python 절반을 위한 타깃별 의존성 해석, 확장 빌드, 번들, 배포</td><td>0.2.0 게시 준비 완료, 0.3.0(native 레벨) 목표 2026-11-30</td></tr><tr><td><a href="projects/toolchain/">toolchain</a></td><td>Build and ship</td><td>Gradle의 python { } 블록: 인터프리터 준비, 타깃별 의존성, 패키징, 핫 리로드</td><td>데스크톱과 Android 동작, toolchain-lite 0.1.0 준비, 플러그인 1.0.0-alpha01 목표 2026-11-30</td></tr><tr><td><a href="projects/pythonx-compose/">pythonx-compose</a></td><td>pythonx</td><td>진짜 Compose 위의 Python 선언형 UI: 데코레이터 컴포저블, 선언된 앱 루트, 저장 상태</td><td>강의 노트북이 처음부터 끝까지 동작, 0.1.0a2 준비, 0.1.0b1 목표 2026-11-20</td></tr><tr><td><a href="projects/pythonx-concurrent/">pythonx-concurrent</a></td><td>pythonx</td><td>Python의 Kotlin식 스코프, 디스패처, 취소. asyncio와 Kotlin 코루틴을 잇습니다</td><td>스펙 완료, 이름 선점, 구현은 pythonx 차례</td></tr><tr><td><a href="projects/pythonx-graphics/">pythonx-graphics</a></td><td>pythonx</td><td>Python 앱을 위한 three.js 대체, 에이전트가 설명하고 연결하고 고치고 재생하는 장면</td><td>스펙 완료, 이름 선점, 구현은 pythonx 차례</td></tr><tr><td><a href="projects/pythonx-platform/">pythonx-platform</a></td><td>pythonx</td><td>멀티플랫폼 androidx 기기 라이브러리 위의 얇은 Python 층</td><td>의도 기록, 이름 선점, 첫 Kotlin 라이브러리 계획</td></tr><tr><td><a href="projects/compose-multiplatform-core-extended/">compose-multiplatform-core-extended</a></td><td>Foundation</td><td>Compose Multiplatform이 제공하지 않는 멀티플랫폼 androidx 라이브러리: 디자인 시스템, 기기 기능</td><td>디자인 시스템 이전 진행 중, OS 알림 계획</td></tr><tr><td><a href="projects/gemstone/">Gemstone</a></td><td>Apps</td><td>대표 앱: 로컬 다중 모델 서빙, OpenAI와 Ollama API, 모든 플랫폼의 채팅</td><td>서버와 데스크톱, 웹, Android 앱 동작, iOS 빌드 성공, 다음은 1.1.0</td></tr></table></div></section><section id="principles"><h2><span data-l="en">Principles</span><span data-l="ko">원칙</span></h2><div data-l="en">
+<dl class="gloss">
+<dt>The original names, always</dt><dd>A Kotlin name in Python means the original Kotlin: <code>androidx.compose</code> is androidx. No namespace is ever renamed to look Pythonic, so documentation, search results and stack traces stay true. What changes is spelling inside a module: members and keyword arguments are also reachable in snake_case, beside their Kotlin names.</dd>
+<dt>Built at build time, never discovered at run time</dt><dd>Kotlin/Native has almost no reflection and a GraalVM native image is a closed world. Every path from Python into Kotlin is generated while the app builds, and the Kotlin compiler, not a string lookup, picks the method. The same choice makes calls fast and native images possible.</dd>
+<dt>Exposure is a blacklist</dt><dd>Every public Kotlin declaration is reachable from Python unless it opts out. A whitelist would make Python a second-class citizen of every library.</dd>
+<dt>CPython, with CPython's meaning</dt><dd>The interpreter is the reference one. When Python is compiled, the result must give the same answers CPython would, including overflow, exceptions, signals and thread switches. Speed is earned by proof, never by changing the rules.</dd>
+<dt>Free-threaded, and only free-threaded</dt><dd>The interpreter moves to CPython 3.15t with no GIL on every platform, the web included, and there will be no GIL build to fall back to. Parallelism comes from threads, not sub-interpreters. Libraries that would turn the GIL back on are reported at build time.</dd>
+<dt>Declarative over imperative</dt><dd>Screens, scenes and motion are declared. Redeclaring is how things change, which is also what makes notebooks and agents able to work on a running app.</dd>
+<dt>Platform features are written once, in Kotlin</dt><dd>A device feature belongs in a multiplatform Kotlin library that Kotlin and Python apps both use. pythonx packages shape such libraries for Python and never reimplement them.</dd>
+<dt>Tests that can fail</dt><dd>Every claim has a test that was seen failing before the code existed, and pixels where pixels are the claim. A check that cannot fail is not a check.</dd>
+</dl></div><div data-l="ko">
+<dl class="gloss">
+<dt>원래 이름 그대로</dt><dd>Python에서 보이는 Kotlin 이름은 원래 Kotlin을 뜻합니다. <code>androidx.compose</code>는 androidx입니다. Python처럼 보이려고 네임스페이스 이름을 바꾸는 일은 없어서 문서, 검색 결과, 스택 트레이스가 그대로 맞습니다. 바뀌는 것은 모듈 안의 표기입니다. 멤버와 키워드 인자는 Kotlin 이름 옆에서 snake_case로도 부를 수 있습니다.</dd>
+<dt>실행 중에 찾지 않고 빌드할 때 만든다</dt><dd>Kotlin/Native에는 리플렉션이 거의 없고 GraalVM 네이티브 이미지는 닫힌 세계입니다. Python에서 Kotlin으로 가는 모든 경로를 앱이 빌드될 때 생성하고, 메서드는 문자열 검색이 아니라 Kotlin 컴파일러가 고릅니다. 이 선택이 호출을 빠르게 하고 네이티브 이미지를 가능하게 합니다.</dd>
+<dt>노출은 블랙리스트</dt><dd>모든 public Kotlin 선언은 스스로 빠지지 않는 한 Python에서 닿습니다. 화이트리스트였다면 Python은 모든 라이브러리의 이등 시민이 됐을 것입니다.</dd>
+<dt>CPython과 CPython의 의미</dt><dd>인터프리터는 기준 구현입니다. Python을 컴파일할 때도 결과는 넘침, 예외, 시그널, 스레드 전환까지 CPython과 같은 답을 내야 합니다. 속도는 규칙을 바꿔서가 아니라 증명으로 얻습니다.</dd>
+<dt>free-threaded, 그것만</dt><dd>인터프리터를 웹을 포함한 모든 플랫폼에서 GIL 없는 CPython 3.15t로 옮기고, 되돌아갈 GIL 빌드는 두지 않습니다. 병렬성은 서브 인터프리터가 아니라 스레드에서 옵니다. GIL을 다시 켜는 라이브러리는 빌드할 때 알려 줍니다.</dd>
+<dt>명령형보다 선언형</dt><dd>화면, 장면, 움직임을 선언합니다. 다시 선언하는 것이 바꾸는 방법이고, 그래서 노트북과 에이전트가 실행 중인 앱을 다룰 수 있습니다.</dd>
+<dt>플랫폼 기능은 Kotlin으로 한 번</dt><dd>기기 기능은 Kotlin 앱과 Python 앱이 함께 쓰는 멀티플랫폼 Kotlin 라이브러리에 속합니다. pythonx 패키지는 그런 라이브러리를 Python에 맞게 다듬고, 다시 구현하지 않습니다.</dd>
+<dt>실패할 수 있는 테스트</dt><dd>모든 주장에는 코드가 있기 전에 실패하는 것을 본 테스트가 있고, 화면이 주장이면 픽셀로 증명합니다. 실패할 수 없는 검사는 검사가 아닙니다.</dd>
+</dl></div></section><section id="future"><h2><span data-l="en">The future we are designing</span><span data-l="ko">설계하는 미래</span></h2><div data-l="en">
+<h3>Python without the GIL, on every device</h3>
+<p>Every platform, phones and browsers included, runs the free-threaded interpreter. We build the free-threaded CPython that Android, iOS and WebAssembly do not ship yet, and the web runs isolated by default so that browser threads are real threads. Python and Kotlin threads then run Python side by side, and compiled code declares itself safe to do so.</p>
+<h3>Fast Python without a second language</h3>
+<p>The reason people write C for Python is speed. TypedPython makes typed Python itself the fast path: compiled ahead of time so it runs on iOS and in native images, with CPython's exact semantics, parallel loops on free-threaded CPython, and objects that are never allocated when nothing can observe them. Where Rust is the right tool, pypackpack builds Rust crates into Python extensions for every target.</p>
+<h3>Concurrency that spans both languages</h3>
+<p>A Python coroutine can be scheduled by Kotlin: stepped by a Kotlin coroutine on any dispatcher, on JVM virtual threads, moved between threads between steps. Cancelling a Kotlin job cancels the Python task under it, and the other way round.</p>
+<h3>Graphics that agents can work on</h3>
+<p>Every 2D and 3D scene is a typed document: describable to a language model, queryable with spatial relations, grounded in pixels through an entity-id buffer, edited through validated and undoable transactions that also produce source patches, rendered headless and replayed. The same scene is drawn natively by Compose and Filament at the platform's frame rate.</p>
+<h3>Models where the user is</h3>
+<p>torchnative runs the models people already use through the API they already use, on CPU, Metal, Vulkan and NPUs, so an app can carry its model rather than call a server.</p></div><div data-l="ko">
+<h3>모든 기기에서 GIL 없는 Python</h3>
+<p>휴대폰과 브라우저를 포함한 모든 플랫폼이 free-threaded 인터프리터로 돕니다. Android, iOS, WebAssembly가 아직 제공하지 않는 free-threaded CPython은 우리가 직접 빌드하고, 웹은 기본으로 격리돼서 브라우저 스레드가 진짜 스레드가 됩니다. 그러면 Python 스레드와 Kotlin 스레드가 나란히 Python을 실행하고, 컴파일된 코드는 그래도 안전하다고 스스로 선언합니다.</p>
+<h3>두 번째 언어 없이 빠른 Python</h3>
+<p>사람들이 Python을 위해 C를 쓰는 이유는 속도입니다. TypedPython은 타입 붙은 Python 자체를 빠른 길로 만듭니다. 미리 컴파일해서 iOS와 네이티브 이미지에서 돌고, CPython과 정확히 같은 의미를 지키며, free-threaded CPython에서 루프를 병렬로 돌리고, 아무도 관측할 수 없는 객체는 만들지 않습니다. Rust가 맞는 도구인 곳에서는 pypackpack이 Rust 크레이트를 모든 타깃용 Python 확장으로 빌드합니다.</p>
+<h3>두 언어에 걸친 동시성</h3>
+<p>Python 코루틴을 Kotlin이 스케줄할 수 있습니다. Kotlin 코루틴이 어떤 디스패처에서든, JVM 가상 스레드 위에서도 한 단계씩 실행하고, 단계 사이에 스레드를 옮길 수 있습니다. Kotlin job을 취소하면 그 아래의 Python 태스크가 취소되고, 반대도 같습니다.</p>
+<h3>에이전트가 다룰 수 있는 그래픽스</h3>
+<p>모든 2D, 3D 장면은 타입이 있는 문서입니다. 언어 모델에게 설명할 수 있고, 공간 관계로 질의할 수 있고, 엔티티 ID 버퍼로 픽셀과 연결되고, 검증되고 되돌릴 수 있으며 소스 패치까지 내는 트랜잭션으로 고치고, 창 없이 렌더링하고 재생합니다. 같은 장면을 Compose와 Filament가 플랫폼 프레임 속도로 네이티브하게 그립니다.</p>
+<h3>사용자가 있는 곳의 모델</h3>
+<p>torchnative는 사람들이 이미 쓰는 모델을 이미 쓰는 API로 CPU, Metal, Vulkan, NPU에서 돌려서, 앱이 서버를 부르지 않고 모델을 품고 다닐 수 있게 합니다.</p></div></section><section id="roadmap"><h2><span data-l="en">Roadmap</span><span data-l="ko">로드맵</span></h2><div data-l="en">
+<p>The projects are finished one at a time, in this order, each to a release whose central claim is usable in practice.</p>
+<ol>
+<li><b>torchnative</b> 0.1.0b5: layout cleanup, Metal generation, automated releases.</li>
+<li><b>python-multiplatform</b> with <b>TypedPython</b>: free-threaded 3.15t, the build gate by default, compiled modules shipped through pypackpack (target 2026-11-30).</li>
+<li><b>pypackpack</b> 0.3.0 and the <b>toolchain</b> plugin 1.0.0-alpha01: native and mixed build levels, Cargo backend, a published plugin (target 2026-11-30).</li>
+<li><b>pythonx-compose</b> 0.1.0b1: the whole lecture notebook from PyPI (target 2026-11-20).</li>
+<li>The other <b>pythonx</b> packages, specified and named today, and <b>Gemstone</b> 1.1.0.</li>
+</ol></div><div data-l="ko">
+<p>프로젝트는 이 순서대로 하나씩, 핵심 주장이 실제로 쓸 수 있는 출시까지 마무리합니다.</p>
+<ol>
+<li><b>torchnative</b> 0.1.0b5: 구조 정리, Metal에서의 생성, 자동 배포.</li>
+<li><b>python-multiplatform</b>과 <b>TypedPython</b>: free-threaded 3.15t, 기본으로 켜진 빌드 게이트, pypackpack으로 배포되는 컴파일 모듈 (목표 2026-11-30).</li>
+<li><b>pypackpack</b> 0.3.0과 <b>toolchain</b> 플러그인 1.0.0-alpha01: native와 mixed 빌드 레벨, Cargo 백엔드, 공개 배포된 플러그인 (목표 2026-11-30).</li>
+<li><b>pythonx-compose</b> 0.1.0b1: 강의 노트북 전체를 PyPI에서 (목표 2026-11-20).</li>
+<li>스펙과 이름을 확보해 둔 나머지 <b>pythonx</b> 패키지들, 그리고 <b>Gemstone</b> 1.1.0.</li>
+</ol></div></section><section id="glossary"><h2><span data-l="en">Glossary</span><span data-l="ko">용어</span></h2><div data-l="en">
+<dl class="gloss">
+<dt>Downcall / upcall</dt><dd>A call from Kotlin into Python, and from Python into Kotlin.</dd>
+<dt>Binder</dt><dd>The part of python-multiplatform that makes Kotlin modules importable from Python under their own names.</dd>
+<dt>Artifact walker</dt><dd>The Gradle plugin step that reads compiled jars and klibs and generates the Kotlin source of their binding table.</dd>
+<dt>Free-threaded (3.15t)</dt><dd>The CPython build without the global interpreter lock; <code>t</code> marks it in version names.</dd>
+<dt>abi3t</dt><dd>CPython 3.15's stable ABI for free-threaded builds (PEP 803): one extension wheel across versions.</dd>
+<dt>pythonx</dt><dd>Python language extensions, in the spirit of androidx and kotlinx; one shared namespace package.</dd>
+<dt>ppp, tcl</dt><dd>The commands of pypackpack and of toolchain-lite.</dd>
+<dt>FastTrack</dt><dd>pypackpack's fast path for shipping code updates to apps.</dd>
+</dl></div><div data-l="ko">
+<dl class="gloss">
+<dt>downcall / upcall</dt><dd>Kotlin에서 Python으로의 호출, Python에서 Kotlin으로의 호출.</dd>
+<dt>바인더</dt><dd>Kotlin 모듈을 원래 이름 그대로 Python에서 import하게 해 주는 python-multiplatform의 부분.</dd>
+<dt>아티팩트 워커</dt><dd>컴파일된 jar와 klib을 읽어 바인딩 표의 Kotlin 소스를 생성하는 Gradle 플러그인 단계.</dd>
+<dt>free-threaded (3.15t)</dt><dd>전역 인터프리터 락이 없는 CPython 빌드. 버전 이름의 <code>t</code>가 표시입니다.</dd>
+<dt>abi3t</dt><dd>free-threaded 빌드를 위한 CPython 3.15의 안정 ABI(PEP 803). 확장 wheel 하나를 여러 버전에서 씁니다.</dd>
+<dt>pythonx</dt><dd>androidx, kotlinx와 같은 정신의 Python 언어 확장. 하나의 공유 네임스페이스 패키지입니다.</dd>
+<dt>ppp, tcl</dt><dd>pypackpack과 toolchain-lite의 명령.</dd>
+<dt>FastTrack</dt><dd>앱에 코드 업데이트를 빠르게 보내는 pypackpack의 경로.</dd>
+</dl></div></section></div></div></main>
+<footer><div class="wrap"><span data-l="en">thisisthepy builds a Python that runs everywhere Kotlin runs. Every project is open source under Apache-2.0.</span><span data-l="ko">thisisthepy는 Kotlin이 도는 모든 곳에서 도는 Python을 만듭니다. 모든 프로젝트는 Apache-2.0 오픈소스입니다.</span><br><a href="https://github.com/thisisthepy">github.com/thisisthepy</a> · <a href="#projects"><span data-l="en">All projects</span><span data-l="ko">전체 프로젝트</span></a></div></footer>
 </body></html>
